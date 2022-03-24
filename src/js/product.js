@@ -29,7 +29,6 @@ const pdpHighlights = document.getElementById('pdp-highlights');
 const beforeAfterCarousel = document.getElementById('pdp-before-after__carousel');
 const themeStrings = window.theme.strings;
 const themeMoneyFormat = window.theme.moneyFormat;
-const subscribePopoverBtns = document.querySelectorAll('.smartrr-selling-plan-group-popover-trigger');
 const pdpImgCarousel = document.getElementById('pdp-img-carousel')
 const pdpFAQ = document.getElementById('app-pdp-faq')
 const addToCartMobile = document.getElementById('pdp-add-to-cart-mobile')
@@ -248,49 +247,6 @@ if (seeMoreLessHighlightsLink) {
 
 // Toggle Subscription Popover
 if (subscribePopoverBtns) {
-  const clickHandler = (e) => {
-    var currentBtn = e.currentTarget;
-  
-    const { popoverId } = currentBtn.dataset;
-  
-    if (popoverId) {
-      const popover = document
-      .querySelectorAll('.smartrr-selling-plan-group-popover[data-popover-id=' + popoverId + ']')[0];
-  
-      popover.classList.toggle('smartrr-selling-plan-group-popover--shown');
-    }
-  }
-
-  const mouseOverHandler = (e) => {
-    var currentBtn = e.currentTarget;
-
-    const { popoverId } = currentBtn.dataset;
-
-    if (popoverId) {
-      const popover = document
-      .querySelectorAll('.smartrr-selling-plan-group-popover[data-popover-id=' + popoverId + ']')[0];
-
-      if (!popover.classList.contains('smartrr-selling-plan-group-popover--shown')) {
-        popover.classList.add('smartrr-selling-plan-group-popover--shown');
-      }
-    }
-  }
-
-  const mouseLeaveHandler = (e) => {
-    var currentBtn = e.currentTarget;
-
-    const { popoverId } = currentBtn.dataset;
-
-    if (popoverId) {
-      const popover = document
-      .querySelectorAll('.smartrr-selling-plan-group-popover[data-popover-id=' + popoverId + ']')[0];
-
-      if (popover.classList.contains('smartrr-selling-plan-group-popover--shown')) {
-        popover.classList.remove('smartrr-selling-plan-group-popover--shown');
-      }
-    }
-  }
-
   subscribePopoverBtns.forEach((btn) => {
     enquire.register(window.themeConfig.mediaQueries.smDown, {
       match: () => {
@@ -312,19 +268,4 @@ if (subscribePopoverBtns) {
       },
     });
   });
-
-  document.querySelectorAll('.smartrr-selling-plan-group-popover__close').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      var currentBtn = e.currentTarget;
-
-      const { popoverId } = currentBtn.dataset;
-
-      if (popoverId) {
-        const popover = document
-        .querySelectorAll('.smartrr-selling-plan-group-popover[data-popover-id=' + popoverId + ']')[0];
-
-        popover.classList.remove('smartrr-selling-plan-group-popover--shown');
-      }
-    });
-  })
 }

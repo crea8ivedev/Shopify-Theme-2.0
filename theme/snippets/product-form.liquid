@@ -6,7 +6,7 @@
   Product form for product page template
   `data-product-form` and `data-product-handle` used by theme ProductForm scripts
 {% endcomment %}
-{% form 'product', product, class: 'pdp-form', data-product-form: '', data-product-handle: product.handle, data-smartrr-form-id: product.id %}
+{% form 'product', product, class: 'pdp-form', data-product-form: '', data-product-handle: product.handle %}
 
   {% unless product.has_only_default_variant %}
     {% for option in product.options_with_values %}
@@ -57,12 +57,11 @@
     default quantity of 1 is assumed.
   {%- endcomment -%}
 
-  {% render 'smartrr-product' %}
 
   {% comment %}
     <!-- Current Selling Plan ID - value used for subscription plans -->
   {% endcomment %}
-  <input id="SellingPlan" type="hidden" name="selling_plan" data-smartrr-selling-plan-input value="{{ current_selling_plan_allocation.selling_plan.id | default: '' }}">
+  <input id="SellingPlan" type="hidden" name="selling_plan">
 
   <p class="form-block-inline hidden">
     <label for="Quantity" class="form-label">{{ 'products.product.quantity' | t }}</label>
