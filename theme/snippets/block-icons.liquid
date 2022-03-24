@@ -1,0 +1,10 @@
+<section class="pdp-icons section p-10 sm:p-16 bg-green-500">
+  <div class="copy copy--wide grid grid-cols-2 justify-items-center sm:grid-cols-4 gap-4">
+    {% for block in section.blocks %}
+      <div class="pdp-icons__wrap w-full flex-none">
+        {% include 'responsive-image' with image: block.settings.icon_image, image_class: 'pdp-icons__image' %}
+        <h6 class="text-white text-center text-lg">{{ block.settings.icon_title }}</h6>
+      </div>
+    {% endfor %}
+  </div>
+</section>

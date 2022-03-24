@@ -1,0 +1,23 @@
+<!-- /templates/customers/activate_account.liquid -->
+<div class="page-pad py-20 bg-cream-500">
+  <div class="copy copy--narrow">
+    {% form 'activate_customer_password' %}
+      <div class="flex flex-col space-y-6">
+        <h1 class="h3 font-header uppercase mb-6">Activate your account</h1>
+        {{ form.errors | default_errors }}
+        <div class="password">
+          <input class="form-input w-full" type="password" name="customer[password]" placeholder="Password"/>
+        </div>
+        <div class="password_confirm">
+          <input class="form-input w-full" type="password" name="customer[password_confirmation]" placeholder="Password Confirmation"/>
+        </div>
+        <div class="action_bottom flex flex-col items-center">
+          <div><input class="btn btn--sm" type="submit" value="Activate Account"/></div>
+          <div class="font-header my-4">OR</div>
+          <div><input class="btn btn--sm btn--secondary" type="submit" name="decline" value="Decline"/></div>
+        </div>
+      </div>
+
+    {% endform %}
+  </div>
+</div>

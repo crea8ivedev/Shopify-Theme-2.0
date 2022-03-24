@@ -1,0 +1,46 @@
+{%- comment -%}
+  Stylesheets
+{%- endcomment -%}
+<style>
+  /* stylelint-disable */
+  #hero--{{ section.id }} .hero__content-block {
+    color: {{ section.settings.text_color }};
+  }
+
+  @media (min-width: 768px) {
+    #hero--{{ section.id }} .hero__content-block {
+      background: rgba(255, 255, 255, {{ section.settings.background_opacity }});
+    }
+  }
+  /* stylelint-enable */
+</style>
+
+{%- comment -%}
+  Template
+{%- endcomment -%}
+<section id="hero--{{ section.id }}" class="section hero {% if section.settings.full_height %} hero--full{% endif %} relative bg-gray-200">
+  {%- if section.settings.image != blank -%}
+    <img class="hero__image {% if section.settings.image_mobile != blank %}hidden{% endif %}  md:block" src="{{ section.settings.image | img_url: '2048x' }}">
+  {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg hero__image' }}
+  {%- endif -%}
+  {%- if section.settings.image_mobile != blank -%}
+    <img class="hero__image hero__image--mobile md:hidden" src="{{ section.settings.image_mobile | img_url: '2048x' }}">
+  {%- endif -%}
+
+  <div class="hero__content wrap wrap--pd mx-auto {{ section.settings.horizontal_position }} {{ section.settings.vertical_position }}">
+    <div class="hero__content-block" {% if section.settings.enable_animations %}section-aos="{{ section.settings.animation_style }}" section-aos-duration="{{ section.settings.animation_duration }}" section-aos-delay="{{ section.settings.animation_delay }}"{% endif %}>
+      {%- if section.settings.title != blank -%}
+        <h1 class="h1 font-header mb-6">{{ section.settings.title_header }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="large">
+          {{ section.settings.text }}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <div class="mt-8"><a href="{{ section.settings.button_link }}" class="{{ section.settings.button_type }}">{{ section.settings.button_label }}</a></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+{% if section.settings.enable %}
+  <div class="pdp-okendo-reviews okendo-style-overide py-20 bg-cream-500">
+    <div class="wrap wrap--pd">
+      {% render 'okendo-reviews-widget', product: product %}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "PDP Okendo Reviews",
+    "class": "pdp-okendo-reviews",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable",
+        "label": "Enable",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

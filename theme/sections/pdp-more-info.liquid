@@ -1,0 +1,124 @@
+{% comment %} Variables {% endcomment %}
+<script type="text/javascript">
+  window.productPageData = window.productPageData || {};
+  window.productPageData.faq = [
+    {% for block in section.blocks %}
+      {
+        "question": {{ block.settings.question | json }},
+        "answer": {{ block.settings.answer | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const videoAutoplay = document.getElementById('video-autoplay');
+
+    if (videoAutoplay) {
+      videoAutoplay.play();
+    }
+  });
+</script>
+
+<div class="section py-10 md:py-16 bg-cream-500 overflow-hidden md:overflow-visible">
+  <div class="wrap wrap--pd flex-col md:flex-row flex">
+    <div class="w-full md:w-1/2 relative order-2 md:order-1">
+      <div class="pdp-more-info__video-wrap aspect-h-1 md:absolute">
+        {% if section.settings.media_option == 'image' %}
+          {% if section.settings.image_file %}
+            <img class="h-full w-full object-cover overflow-hidden rounded-full border bg-green-500 lazyload" data-src="{{ section.settings.image_file | img_url: '800x' }}" src="{{ section.settings.image_file | img_url: '100x' }}" alt="Product demonstration">
+          {% endif %}
+        {% elsif section.settings.media_option == 'video' %}
+          {% if section.settings.video_file_url_mp4 or section.settings.video_file_url_webm %}
+            <video id="video-autoplay" class="h-full w-full object-cover overflow-hidden rounded-full border bg-green-500" autoplay muted loop playsinline>
+              {% if section.settings.video_file_url_mp4 %}
+                <source src="{{ section.settings.video_file_url_mp4 }}" type="video/mp4">
+              {% endif %}
+              {% if section.settings.video_file_url_webm %}
+                <source src="{{ section.settings.video_file_url_webm }}" type="video/webm">
+              {% endif %}
+            </video>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="w-full md:w-1/2 order-1 md:order-2">
+      <h2 class="font-header h2 mb-2 uppercase">{{ section.settings.title }}</h2>
+      <p class="large">{{ section.settings.description }}</p>
+      <div id="app-pdp-faq" class="pdp-more-info__faq-list my-8"></div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+    "name": "PDP More Info",
+    "class": "pdp-more-info",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Title Here"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Description here"
+      },
+      {
+        "type": "select",
+        "id": "media_option",
+        "label": "Media Option",
+        "info": "Selects which media to show in circle",
+        "options": [
+          {
+            "value": "image",
+            "label": "Image"
+          },
+          {
+            "value": "video",
+            "label": "Video"
+          }
+        ]
+      },
+      {
+        "type": "image_picker",
+        "id": "image_file",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "video_file_url_webm",
+        "label": "Video File URL (webm)",
+        "info": "Upload the video in Settings > Files. Then attach URL here."
+      },
+      {
+        "type": "text",
+        "id": "video_file_url_mp4",
+        "label": "Video File URL (mp4)",
+        "info": "Upload the video in Settings > Files. Then attach URL here."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "faq",
+        "name": "FAQ",
+        "settings": [
+          {
+            "type": "text",
+            "id": "question",
+            "label": "Question",
+            "default": "Title here"
+          },
+          {
+            "type": "textarea",
+            "id": "answer",
+            "label": "Answer",
+            "default": "Answer here"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

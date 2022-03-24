@@ -1,0 +1,48 @@
+<section id="page-sustainability-text-section" class="py-16 md:py-32 bg-green-500 flex justify-center flex-wrap">
+  <div class="copy copy--pd flex flex-col items-center text-center text-white">
+    {% if section.settings.title != blank %}
+      <h2 class="h2 uppercase font-header mb-6">{{ section.settings.title }}</h2>
+    {% endif %}
+    <p class="large">{{ section.settings.description }}</p>
+    {% if section.settings.cta_url and section.settings.cta_text %}
+      <a class="btn mt-12" href={{ section.settings.cta_url }}>{{ section.settings.cta_text}}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+    "name": "Text Section",
+    "class": "page-sustinability-text-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Title Here"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Description here"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text",
+        "info": "Learn More",
+        "default": "Learn more"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "URL"
+      }
+    ]
+  }
+{% endschema %}

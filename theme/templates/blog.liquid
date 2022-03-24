@@ -1,0 +1,82 @@
+{% comment %}
+  Variables
+{% endcomment %}
+{% assign featured_article = blog.articles[0] %}
+
+{% comment %}
+  Stylesheet
+{% endcomment %}
+<style>
+  .article-image {
+    height: 300px;
+  }
+</style>
+
+{% comment %}
+  Template
+{% endcomment %}
+{% paginate blog.articles by 10 %}
+
+  <div id="blog" class="py-10 bg-cream-500">
+    <div class="wrap wrap--pd">
+
+      <section id="featured-article" class="">
+        <div class="flex justify-center items-center">
+          <a class="w-full h-full" href="{{ featured_article.url }}">
+            {% include 'responsive-image' with image: featured_article.image, image_class: 'object-cover w-full object-center' %}
+        </div>
+        <div class="flex flex-col md:justify-center">
+          <div class="flex flex-col space-y-4">
+            <small class="text-xs uppercase"><a href="{{ blog.url }}/tagged/{{ featured_article.tags | join: ',' | handleize }}">{{ featured_article.tags | join: ', ' }}</a>&nbsp;</small>
+            <h2 class="h2 uppercase font-header"><a href="{{ featured_article.url }}">{{ featured_article.title }}</a></h2>
+            <p>
+              {% if article.excerpt.size > 0 %}
+                {{ featured_article.excerpt }}
+              {% else %}
+                {{ featured_article.content | strip_html | truncate: 50 }}
+              {% endif %}
+            </p>
+            <p class="text-sm text-gray-500">
+              by:
+              {{ featured_article.author }}
+              |
+              {{ featured_article.published_at | date: "%b %d, %Y" }}
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="grid grid-cols-1 md:grid-cols-4 gap-10 py-10">
+        {% for article in blog.articles offset:1 %}
+          <article class="col-span-1 {% if article.metafields.article.span_cols != blank %}md:col-span-{{ article.metafields.article.span_cols }}{% endif %}">
+            <div class="flex flex-col space-y-2">
+              <a class="w-full h-auto" href="{{ article.url }}">
+                {% include 'responsive-image' with image: article.image, image_class: 'article-image object-cover w-full object-center' %}
+              </a>
+              <small class="text-xs uppercase"><a href="{{ blog.url }}/tagged/{{ article.tags | join: ',' }}">{{ article.tags | join: ', ' }}</a>&nbsp;</small>
+              <h2 class="h4 uppercase font-header"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+              <p>
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt }}
+                {% else %}
+                  {{ article.content | strip_html | truncate: 50 }}
+                {% endif %}
+              </p>
+              <p class="text-sm text-gray-500">
+                by:
+                {{ article.author }}
+                |
+                {{ article.published_at | date: "%b %d, %Y" }}
+              </p>
+            </div>
+          </article>
+        {% endfor %}
+        {% if paginate.pages > 1 %}
+          {{ paginate | default_pagination }}
+        {% endif %}
+      </section>
+
+    </div>
+
+  </div>
+
+{% endpaginate %}

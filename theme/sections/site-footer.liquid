@@ -1,0 +1,138 @@
+<footer id="footer" class="site-footer section py-10 bg-black text-white" role="content-info">
+
+  <div class="wrap wrap--pd">
+    
+    <div class="md:grid md:grid-cols-2">
+
+      <div class="md:order-2 klaviyo-newsletter-signup">
+        <div class="klaviyo-form-WLuiLe"></div>
+      </div>
+      {% comment %} {% form 'customer', class: 'md:order-2' %}
+
+        <div class="flex items-center md:items-start flex-col space-y-8 copy">
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          
+          {% if form.posted_successfully? %}
+            <div class="banner banner--success text-black" aria-role="alert">
+              <p>{{ 'customer.newsletter_form.confirmation' | t }}</p>
+            </div>
+          {% else %}
+            <label for="NewsletterEmail" class="uppercase font-header">STAY IN TOUCH</label>
+            {{ form.errors | default_errors }}
+            <div class="flex flex-col items-center md:flex-row space-y-4 md:space-y-0 w-full">
+              <input type="email"
+                class="bg-black px-4 py-2 w-full border border-white"
+                id="NewsletterEmail"
+                name="contact[email]"
+                value=""
+                placeholder="{{ 'customer.newsletter_form.placeholder' | t }}"
+                aria-label="{{ 'customer.newsletter_form.placeholder' | t }}"
+                autocorrect="off"
+                autocapitalize="off"
+                required>
+
+              <div class="text-center border border-white">
+                <button class="btn btn--secondary btn--sm" type="submit">
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          {% endif %}
+
+          <!-- Standard form submission -->
+          {% if form.posted_successfully? %}
+            <div class="note note--success" aria-role="alert">
+              {{ 'customer.newsletter_form.confirmation' | t }}
+            </div>
+          {% endif %}
+
+          <!-- JavaScript form submission -->
+          <div
+            id="form-response"
+            class="banner mt-4 hidden"
+            data-success="{{ 'customer.newsletter_form.confirmation' | t }}"
+            data-error="{{ 'customer.newsletter_form.submit_error' | t }}">
+          </div>
+        </div>
+
+      {% endform %} {% endcomment %}
+
+      <ul class="site-footer__menu grid justify-center gap-x-6 gap-y-6 py-10 text-sm md:order-1 md:grid-cols-2">
+        {%- for link in linklists.footer.links -%}
+          {%- assign child_list_handle = link.title | handleize -%}
+          {%- if linklists[child_list_handle].links != blank -%}
+            <li>
+              <a href="{{ link.url }}" class="font-header uppercase tracking-widest">{{ link.title }}</a>
+              <ul class="nav-submemu">
+                {%- for childlink in linklists[child_list_handle].links -%}
+                <li><a href="{{ childlink.url }}" class="font-header uppercase tracking-widest">{{ childlink.title | escape }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </li>
+          {%- else -%}
+            <li><a href="{{ link.url }}" class="font-header uppercase tracking-widest">{{ link.title }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if shop.customer_accounts_enabled -%}
+          <li><a href="/account" class="font-header uppercase tracking-widest">Account</a></li>
+        {%- endif -%}
+      </ul>
+    
+    </div>
+
+
+    <hr class="my-6">
+
+    <div class="flex flex-col-reverse md:flex-row space-y-6 space-y-4 space-y-reverse md:space-y-0 justify-between items-center py-4">
+      <a href="/">
+        <img src="{{ section.settings.logo | img_url: '200x' }}" alt="Footer logo">
+      </a>
+      <p class="text-xs text-center">
+        Copyright © 2021 Common Heir  <span class="hidden md:inline-block">•</span><br class="md:hidden"/> <a href="/pages/terms-of-service">Terms of Service</a>  •  <a href="/pages/privacy-policy">Privacy Policy</a>
+      </p>
+      <div>
+        <ul class="flex space-x-4">
+          {% for block in section.blocks %}
+            <li>
+              <a href="{{ block.settings.url }}" target="_blank">
+                <img src="{{ block.settings.image | img_url: '25x25'}}" alt="Social Icon {{ forloop.index }}">
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+{% schema %}
+  {
+    "name": "Site Footer",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "social_icon",
+        "name": "Social Icon",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

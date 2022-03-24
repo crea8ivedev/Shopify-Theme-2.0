@@ -1,0 +1,116 @@
+<section id="home-social-proof--{{ section.id }}" class="home-social-proof section py-10 bg-cream-500">
+  <div class="wrap wrap--pd grid grid-cols-2 gap-10 md:flex md:space-x-6 md:space-x-10 items-center justify-center justify-items-center" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>
+    {% for block in section.blocks %}
+      <div class="home-social-proof__brand">
+        {% if block.settings.brand_url %}
+          <a href="{{ block.settings.brand_url }}">
+        {% endif %}
+          {% include 'responsive-image' with image: block.settings.brand_logo %}
+        {% if block.settings.brand_url %}
+          </a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Sections",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Animations"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_animations",
+        "label": "Enable Animations",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "animation_style",
+        "label": "Animation Style",
+        "options": [
+          {
+            "group": "Fade",
+            "value": "fade-up",
+            "label": "Fade up"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-down",
+            "label": "Fade down"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-left",
+            "label": "Fade left"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-right",
+            "label": "Fade right"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-up",
+            "label": "Flip up"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-down",
+            "label": "Flip down"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-left",
+            "label": "Flip left"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-right",
+            "label": "Flip right"
+          }
+        ],
+        "default": "fade-up"
+      },
+      {
+        "type": "range",
+        "id": "animation_duration",
+        "min": 100,
+        "max": 1000,
+        "step": 50,
+        "unit": "ms",
+        "label": "Animation Duration (ms)",
+        "default": 150
+      }
+    ],
+    "presets": [
+      {
+        "name": "Social Proof",
+        "category": "Section"
+      }
+    ],
+    "blocks":[
+      {
+        "type": "brand",
+        "name": "Brand",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "brand_logo",
+            "label": "Brand Logo"
+          },
+          {
+            "type": "url",
+            "id": "brand_url",
+            "label": "URL",
+            "info": "This is optional"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

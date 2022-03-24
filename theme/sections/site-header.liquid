@@ -1,0 +1,328 @@
+{%- if section.settings.announcement -%}
+  {%- if section.settings.announcement_only_home == false or template.name == 'index' -%}
+    <style>
+      .announcement__message {
+        font-size: {{ section.settings.announcement_font_size_mobile }}px;
+      }
+
+      @media screen and (min-width: 769px) {
+        .announcement__message {
+          font-size: {{ section.settings.announcement_font_size_desktop }}px;
+        }
+      }
+    </style>
+
+    <div id="announcement" class="announcement p-1 pr-4 text-center relative">
+      <button id="announcement__close" class="btn-icon btn-icon--hover-disable absolute top-1/2 right-2 z-10 text-white transform -translate-y-1/2">
+        <i class="material-icons-outlined">close</i>
+      </button>
+      {%- if section.settings.announcement_link != blank -%}
+        <a href="{{ section.settings.announcement_link }}" class="announcement__link">
+      {%- endif -%}
+
+      <p class="announcement__message uppercase text-sm text-white leading-5" style="font-family: {{ section.settings.announcement_font_family }};">{{ section.settings.announcement_text | escape }}</p>
+
+      {%- if section.settings.announcement_link != blank -%}
+        </a>
+      {%- endif -%}
+    </div>
+
+  {%- endif -%}
+{%- endif -%}
+
+<header id="site-header" data-section-id="{{ section.id }}" data-section-type="header-section" role="banner">
+  <div class="site-header__wrap wrap wrap--pd">
+    <div id="site-mobile-menu" class="lg:hidden flex items-center site-mobile-menu">
+      <i class="material-icons-outlined cursor-pointer">menu</i>
+    </div>
+  
+    {%- if template.name == 'index' -%}<h1 class="site-title ml-4 lg:ml-0" itemscope itemtype="http://schema.org/Organization">{%- else -%}<div class="site-title ml-4 lg:ml-0" itemscope itemtype="http://schema.org/Organization">{%- endif -%}
+      <a href="/" itemprop="url" class="site-header__logo">
+        {% include 'icon-logo-words' %}
+      </a>
+    {%- if template.name == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
+  
+    <nav id="site-navigation" class="site-navigation hidden lg:block" role="navigation">
+      <ul class="nav-menu text-sm">
+      {%- for link in linklists[section.settings.nav_menu].links -%}
+        {%- assign child_list_handle = link.title | handleize -%}
+        {%- if linklists[child_list_handle].links != blank -%}
+          <li>
+            <a href="{{ link.url }}" class="site-navigation__link {% if link.active %}site-navigation__link--active{% endif %} font-header uppercase tracking-widest relative">{{ link.title }}</a>
+            <ul class="nav-submemu">
+              {%- for childlink in linklists[child_list_handle].links -%}
+              <li><a href="{{ childlink.url }}" class="site-navigation__link {% if link.active %}site-navigation__link--active{% endif %}font-header uppercase tracking-widest relative">{{ childlink.title | escape }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </li>
+        {%- else -%}
+          <li>
+            <span class="site-navigation__link{% if link.active %} site-navigation__link--active{% endif %} font-header uppercase tracking-widest relative">
+              {% if link.active %}
+                {{ link.title }}
+              {% else %}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {% endif %}
+            </span>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if shop.customer_accounts_enabled -%}
+        <li><a href="/account" class="site-navigation__link{% if template.directory == 'customers' %}   site-navigation__link--active{% endif %} font-header uppercase tracking-widest">Account</a></li>
+      {%- endif -%}
+      </ul>
+    </nav>
+  
+    <nav id="site-actions" class="site-actions ml-auto lg:ml-0" role="navigation">
+      <a class="open-cart" href="#cart">
+        <div class="flex space-x-2 items-center">
+          <span class="font-header uppercase tracking-widest text-sm">Bag</span>
+          <div id="cart-count" class="site-header__bag" data-cart-item-count="0"></div>
+        </div>
+      </a>
+    </nav>
+  </div>
+
+  {% comment %}
+    Mega Menu
+  {% endcomment %}
+  {% if section.settings.mega_menu_enable %}
+    <div id="mega-menu" class="mega-menu">
+      <div class="mega-menu__grid grid grid-cols-{{ section.blocks.size }} wrap justify-items-center bg-black">
+        {% for block in section.blocks %}
+          {% assign mega_menu_product = all_products[block.settings.mega_menu_product] %}
+
+          <a class="mega-menu__item flex" href="{{ mega_menu_product.url }}">
+            <div class="mega-menu__item-image-wrap">
+              <img class="mega-menu__item-image" src="{{ mega_menu_product.featured_image | img_url: 'x600' }}" alt="{{ mega_menu_product.featured_image.alt }}">
+            </div>
+            <div class="flex flex-col space-y-3 ml-3 justify-center">
+              <h3 class="text-xl font-bold uppercase font-header">
+                {% if block.settings.mega_menu_title_override %}
+                  {{ block.settings.mega_menu_title_override }}
+                {% else %}
+                  {{ mega_menu_product.title }}
+                {% endif %}
+              </h3>
+              {% if block.settings.mega_menu_subtitle %}
+                <span class="large text-red-500">{{ block.settings.mega_menu_subtitle }}</span>
+              {% endif %}
+              {% if block.settings.mega_menu_subtitle %}
+                <span>{{ block.settings.mega_menu_short_description }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+  
+</header>
+
+
+<div id="app-side-menu"></div>
+
+<script>
+  window.siteHeaderData = window.siteHeaderData || {};
+  window.siteHeaderData.links = [
+    {% for link in linklists[section.settings.nav_menu].links %}
+      {
+        title: {{ link.title | json }},
+        url: {{ link.url | json }},
+        active: {{ link.active | json }},
+      },
+    {% endfor %}
+    {
+      title: 'account',
+      url: '/account',
+      active: {% if template.directory == 'customers' %}true{% else %}false{% endif %},
+    }
+  ];
+  window.siteHeaderData.megaMenu = {
+    "enabled": {{ section.settings.mega_menu_enable | json }},
+    "target": {{ section.settings.mega_menu_target | json }},
+    "items": [
+      {% for block in section.blocks %}
+        {% assign mega_menu_product = all_products[block.settings.mega_menu_product] %}
+        {
+          title: {% if block.settings.mega_menu_title_override %}{{ block.settings.mega_menu_title_override | json }}{% else %}{{ mega_menu_product.title | json }}{% endif %},
+          url: {{ mega_menu_product.url | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  };
+  
+  const announcementBar = document.getElementById('announcement');
+  if (announcementBar) {
+    const announcementClosedTime = localStorage.getItem('announcementClosedTime');
+
+    if (announcementClosedTime) {
+      const date = new Date();
+
+      if (date.getTime() > announcementClosedTime) {
+        localStorage.removeItem('announcementClosedTime');
+      } else {
+        document.getElementById('announcement').classList.add('hidden');
+      }
+    }
+
+    const announcementClose = document.getElementById('announcement__close');
+
+    announcementClose.addEventListener('click', (event) => {
+      const date = new Date();
+      const expiryDate = Number({{ section.settings.expiry_date | json }});
+      const dayToReshow = date + (1000 * 60 * 60 * 24 * expiryDate);
+
+      localStorage.setItem('announcementClosedTime', dayToReshow);
+      announcementBar.classList.add('hidden');
+    })
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "Site Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header Settings"
+      },
+			{
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement",
+        "label": "Show announcement",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_only_home",
+        "label": "Only show on home page",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "expiry_date",
+        "label": "Expiry Date",
+        "default": "3",
+        "info": "Whole numbers only. Amount of days to show the announcement bar again if closed."
+      },
+      {
+        "type": "textarea",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "announcement_link",
+        "label": "Announcement link",
+        "info": "Optional"
+      },
+      {
+        "type": "range",
+        "id": "announcement_font_size_desktop",
+        "min": 10,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Font Size (Desktop)",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "announcement_font_size_mobile",
+        "min": 10,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Font Size (Mobile)",
+        "default": 12
+      },
+      {
+        "type": "select",
+        "id": "announcement_font_family",
+        "label": "Font Family",
+        "options": [
+          {
+            "value": "'quincycf-text', Helvetica, Arial",
+            "label": "Quincy CF"
+          },
+          {
+            "value": "'Roboto Mono', Helvetica, Arial",
+            "label": "Roboto Mono"
+          }
+        ],
+        "default": "'Roboto Mono', Helvetica, Arial"
+      },
+      {
+        "type": "header",
+        "content": "Navigation Menu",
+        "info": "Settings for Navigation Bar"
+      },
+      {
+        "type": "link_list",
+        "id": "nav_menu",
+        "label": "Navigation Menu",
+        "info": "Choose from list of Navigations"
+      },
+      {
+        "type": "header",
+        "content": "Mega Menu",
+        "info": "Settings for Mega Menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_enable",
+        "label": "Enable Mega Menu",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "mega_menu_target",
+        "label": "Mega Menu Target ID",
+        "default": "#mega-menu",
+        "info": "(Please consult a DEV) This is the href of the navigation item set in the navigation menu",
+        "placeholder": "ex. #mega-menu"
+      }
+    ],
+    "max_blocks": 2,
+    "blocks": [
+      {
+        "type": "mega_menu_item",
+        "name": "Mega Menu Item",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Mega Menu Item",
+            "info": "Will be used if mega menu is enabled"
+          },
+          {
+            "type": "product",
+            "id": "mega_menu_product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "mega_menu_title_override",
+            "label": "Title Override",
+            "info": "Leave blank if default product is to be used"
+          },
+          {
+            "type": "text",
+            "id": "mega_menu_subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "text",
+            "id": "mega_menu_short_description",
+            "label": "Short Description"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

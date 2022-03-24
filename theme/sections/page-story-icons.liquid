@@ -1,0 +1,28 @@
+{% include 'block-icons' %}
+
+{% schema %}
+{
+    "name": "Block Icons",
+    "class": "block-icons",
+    "settings": [],
+    "max_blocks": 4,
+    "blocks": [
+      {
+        "type": "icon",
+        "name": "Icon",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon_image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "icon_title",
+            "label": "Icon Title"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

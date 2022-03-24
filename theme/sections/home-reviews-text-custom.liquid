@@ -1,0 +1,112 @@
+<script>
+  window.homePage = window.homePage || {}
+  window.homePage.homeReviewsTextCarousel = [{% for block in section.blocks %}
+    {
+      "title": {{ block.settings.title | json }},
+      "cta_url": {{ block.settings.cta_url | json }},
+      "cta_title": {{ block.settings.cta_title | json }},
+      "stars": {{ block.settings.stars | json }},
+      "review": {{ block.settings.review | json }},
+      "reviewer": {{ block.settings.reviewer | json }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}];
+</script>
+
+<section id="home-reviews-carousel-text-custom-{{ section.id }}" class="home-reviews-carousel-text-custom section py-16 md:py-24 bg-cream-500">
+  <div class="wrap wrap--pd relative text-center">
+    <div class="py-8 md:px-8 order-2 md:order-1 text-center" id="home-reviews-carousel-text-custom__wrap"></div>
+    {% if section.settings.flower_decoration %}
+      <img class="lazyload absolute {% unless section.settings.flower_decoration_show_mobile %}hidden md:block{% endunless %}" data-src="{{ section.settings.flower_decoration | img_url: 'x400' }}" alt="Flower Decoration" style="bottom: {{ section.settings.flower_decoration_bottom }}; right: {{ section.settings.flower_decoration_right }};">
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Reviews Carousel (Text)",
+    "presets": [
+      {
+        "name": "Reviews Carousel (Text)",
+        "category": "Section"
+      }
+    ],
+    "settings": [
+      {
+        "type": "header",
+        "content": "Background Decor"
+      },
+      {
+        "type": "image_picker",
+        "id": "flower_decoration",
+        "label": "Flower Decoration",
+        "info": "Image will overlay on top of image"
+      },
+      {
+        "type": "checkbox",
+        "id": "flower_decoration_show_mobile",
+        "label": "Show mobile",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "flower_decoration_bottom",
+        "label": "Bottom",
+        "default": "0",
+        "info": "y-direction position"
+      },
+      {
+        "type": "text",
+        "id": "flower_decoration_right",
+        "label": "Right",
+        "default": "0",
+        "info": "x-direction position"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "review_block",
+        "name": "Review Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "cta_label",
+            "label": "CTA Label"
+          },
+          {
+            "type": "url",
+            "id": "cta_url",
+            "label": "CTA URL"
+          },
+          {
+            "type": "range",
+            "id": "stars",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "default": 5,
+            "unit": "★",
+            "label": "Stars"
+          },
+          {
+            "type": "textarea",
+            "id": "review",
+            "label": "Review",
+            "default": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.”"
+          },
+          {
+            "type": "text",
+            "id": "reviewer",
+            "label": "Reviewer",
+            "default": "Name here"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

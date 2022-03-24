@@ -1,0 +1,18 @@
+/* --------------------- App Modals --------------------- */
+
+/* --------------------- Newsletter --------------------- */
+/* Title */
+#modal-content--newsletter {
+  background: #3E4B20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 60px;
+}
+
+#modal-content--newsletter .RichText__StyledQuillContainer-sc-11o3xhj-0 p {
+  font-family: "Roboto Mono" !important;
+  text-transform: uppercase !important;
+  color: #fff !important;
+}

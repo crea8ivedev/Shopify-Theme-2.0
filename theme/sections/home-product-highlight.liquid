@@ -1,0 +1,116 @@
+{% render 'ext-product-highlight' section, product %}
+
+{% schema %}
+  {
+    "name": "Product Highlight",
+    "presets": [
+      {
+        "name": "Product Highlight",
+        "category": "Section"
+      }
+    ],
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_ratings",
+        "label": "Enable Ratings",
+        "default": true
+      },
+      {
+        "type": "product",
+        "id": "product_handle",
+        "label": "Product",
+        "info": "Select a product to highlight"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image_mobile",
+        "label": "Background Image (Mobile)"
+      },
+      {
+        "type": "header",
+        "content": "Overrides",
+        "info": "Only use this section if you want to override the default info from product"
+      },
+      {
+        "type": "text",
+        "id": "product_title_override",
+        "label": "Product Title (Override)"
+      },
+      {
+        "type": "textarea",
+        "id": "product_description_override",
+        "label": "Product Description (Override)"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_animations",
+        "label": "Enable Animations",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "animation_style",
+        "label": "Animation Style",
+        "options": [
+          {
+            "group": "Fade",
+            "value": "fade-up",
+            "label": "Fade up"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-down",
+            "label": "Fade down"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-left",
+            "label": "Fade left"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-right",
+            "label": "Fade right"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-up",
+            "label": "Flip up"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-down",
+            "label": "Flip down"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-left",
+            "label": "Flip left"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-right",
+            "label": "Flip right"
+          }
+        ],
+        "default": "fade-up"
+      },
+      {
+        "type": "range",
+        "id": "animation_duration",
+        "min": 100,
+        "max": 1000,
+        "step": 50,
+        "unit": "ms",
+        "label": "Animation Duration (ms)",
+        "default": 300
+      }
+    ]
+  }
+{% endschema %}

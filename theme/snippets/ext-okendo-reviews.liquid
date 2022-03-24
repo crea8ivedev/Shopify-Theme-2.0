@@ -1,0 +1,11 @@
+{% if section.settings.replacement_product %}
+  {% assign current_product = all_products[section.settings.replacement_product] %}
+{% else %}
+  {% assign current_product = product %}
+{% endif %}
+
+<section id="ext-okendo-reviews--{{ section.id }}" class="ext-section__okendo-reviews section py-10 sm:py-10 px-6 md:px-10">
+  <div class="wrap">
+    {% render 'okendo-reviews-widget' with current_product as product %}
+  </div>
+</section>

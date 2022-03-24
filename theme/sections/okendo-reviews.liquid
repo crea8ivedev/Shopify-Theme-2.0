@@ -1,0 +1,27 @@
+<div class="wrap wrap--pd py-10">
+  <div data-oke-reviews-carousel data-oke-reviews-carousel-link="{{ section.settings.link }}" data-oke-reviews-carousel-heading="{{ section.settings.heading }}"></div>
+</div>
+
+{% schema %}
+{
+  "name": "Okendo Reviews Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Okendo Reviews Carousel",
+      "category": "Section"
+    }
+  ]
+}
+{% endschema %}

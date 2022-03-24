@@ -1,0 +1,20 @@
+<section id="{{ id }}">
+  <h2 class="h4 mt-12">{{ section.settings.title }}</h2>
+  {% for block in section.blocks %}
+    <div class="outline-none accordion-section" tabindex="{{ forloop.index }}">
+      <div class="accordion-group flex justify-between pb-3 pt-6 border-b-2 items-center transition ease duration-500 cursor-pointer pr-10 relative">
+        <div class="accordion-group-focus:text-white transition ease duration-500 font-header uppercase font-medium tracking-widest">
+          {{ block.settings.question }}
+        </div>
+        <div class="h-8 w-8 rounded-full items-center inline-flex justify-center transform transition ease duration-300 accordion-group-focus:-rotate-180 absolute top-5 right-0 mb-auto ml-auto mr-2">
+          <svg width="24" height="21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.668 14.163c-1.155 2-4.041 2-5.196 0L1.872 1h20.396l-7.6 13.163z" stroke="#000" stroke-width="2"/></svg>
+        </div>
+      </div>
+      <div class="accordion-group-focus:max-h-screen max-h-0 overflow-hidden ease duration-300">
+        <div class="text-justify pl-4 my-4 space-y-4">
+          {{ block.settings.answer }}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</section>

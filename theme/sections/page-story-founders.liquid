@@ -1,0 +1,68 @@
+{% comment %} Story Highlight {% endcomment %}
+<section id="page-story-highlights" class="bg-cream-500">
+  <div class="wrap wrap--pd py-10">
+    <div class="mb-8 border-b">
+      <h2 class="h2 font-header uppercase mb-2 text-center md:text-left">{{ section.settings.title }}</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 my-10 md:mx-10">
+      {% for block in section.blocks %}
+        <div class="col-span-1">
+          <h3 class="h3 font-header uppercase mb-4">{{ block.settings.full_name }}</h3>
+          <h4 class="large mb-6">{{ block.settings.position }}</h4>
+          <p>{{ block.settings.bio }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    {%- if section.settings.banner_image != blank -%}
+      {% include 'responsive-image' with image: section.settings.banner_image, image_class: 'page-story-founders__image' %}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg page-story-founders__image' }}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Founders",
+    "class": "page-story-founders",
+    "max_blocks": 2,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_image",
+        "label": "Banner Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "founder",
+        "name": "Founder",
+        "settings": [
+          {
+            "type": "text",
+            "id": "full_name",
+            "label": "Full Name",
+            "default": "Founder X"
+          },
+          {
+            "type": "text",
+            "id": "position",
+            "label": "Position",
+            "default": "Position"
+          },
+          {
+            "type": "textarea",
+            "id": "bio",
+            "label": "Bio",
+            "default": "Enter bio here."
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,173 @@
+.btn,
+.btn-outlined,
+.btn-text {
+  font-family: theme('fontFamily.header');
+  border-style: solid;
+  border-width: 1px;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 1em 1.5em;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  user-select: none;
+  width: auto;
+  min-width: 180px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.3s;
+}
+
+.btn {
+  background-color: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #fff;
+}
+
+.btn--secondary {
+  background-color: theme('colors.white');
+  border-color: theme('colors.white');
+  color: var(--c-primary);
+}
+
+.btn--atc {
+  background-color: theme('colors.red.500');
+  border-color: theme('colors.red.500');
+  color: theme('colors.white');
+}
+
+.btn--black {
+  background-color: theme('colors.black');
+  border-color: theme('colors.black');
+  color: theme('colors.white');
+}
+
+.btn.btn--small {
+  font-size: 0.6rem;
+  padding: 0.5em 1em;
+  min-width: auto;
+}
+
+.btn:hover,
+.btn:active {
+  opacity: 0.7;
+}
+
+.btn:disabled,
+.btn:disabled[disabled] {
+  background-color: theme('colors.gray.500');
+  border-color: theme('colors.gray.500');
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-outlined {
+  background-color: transparent;
+  border-color: var(--c-primary);
+  color: var(--c-link);
+}
+
+.btn-outlined:hover {
+  background-color: theme('colors.blue.100');
+  color: var(--c-link-dark);
+}
+
+.btn-text {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--c-link);
+}
+
+.btn-text:hover {
+  /* background-color: theme('colors.blue.100');
+  color: var(--c-link-dark); */
+}
+
+.btn.btn--sm {
+  @apply text-sm;
+
+  padding: 0.6em 1em;
+  min-width: 120px;
+}
+
+.btn--full {
+  @apply w-full;
+}
+
+/* A button that looks like a link */
+
+.btn-link {
+  background-color: transparent;
+  color: var(--c-link);
+}
+
+.btn-link:hover {
+  color: var(--c-link-dark);
+}
+
+/* Icons buttons */
+.btn-icon {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/* For material icons in button */
+.btn-icon i {
+  vertical-align: bottom;
+}
+
+.btn-icon:not(.btn-icon--hover-disable):hover,
+.btn-icon:not(.btn-icon--hover-disable):focus,
+.btn-icon:not(.btn-icon--hover-disable):active {
+  color: var(--c-primary);
+}
+
+.link {
+  position: relative;
+  padding-bottom: 10px;
+  @apply uppercase font-header tracking-wider cursor-pointer;
+}
+
+.link.link--small {
+  padding-bottom: 2px;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-width: 2px;
+}
+
+.link:hover::after {
+  border-width: 3px;
+}
+
+.link.link--small::after {
+  border-width: 1px;
+}
+
+.link.link--small:hover::after {
+  border-width: 2px;
+}
+
+.link.link--red {
+  @apply text-red-500;
+}
+
+.link::after {
+  border-color: theme('colors.black');
+}
+
+.link.link--red::after {
+  border-color: theme('colors.red.500');
+}
+
+.link.link--no-pointer {
+  @apply cursor-default;
+}

@@ -1,0 +1,247 @@
+<section id="home-section-highlight--{{ section.id }}" class="home-section-highlight bg-cream-500 section">
+  <div class="py-16 wrap wrap--pd md:grid md:grid-cols-4 md:gap-6 lg:gap-10 space-y-6 md:space-y-0 {% if section.settings.enable_top_border %}border-t-2{% endif %} {% if section.settings.enable_bottom_border %}border-b-2{% endif %}">
+    <div class="text-center md:text-right flex items-center justify-center md:justify-end col-span-1">
+      <h2 class="h2 uppercase font-header" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style_title }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>{{ section.settings.title }}</h2>
+    </div>
+    <div class="col-span-2">
+      <div class="aspect-w-1 aspect-h-1 overflow-hidden" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style_image }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>
+        {%- if section.settings.image != blank -%}
+          {% include 'responsive-image' with image: section.settings.image, image_class: 'home-section-highlight__image' %}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg home-section-highlight__image' }}
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="flex items-center col-span-1">
+      <p class="large text-center md:text-left" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style_description }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>
+        {{ section.settings.description }}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Section Highlight",
+    "presets": [
+      {
+        "name": "Section Highlight",
+        "category": "Section"
+      }
+    ],
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Title here"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Description here"
+      },
+      {
+        "type": "header",
+        "content": "Borders"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_top_border",
+        "label": "Enable Top Border",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_bottom_border",
+        "label": "Enable Bottom Border",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Animations"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_animations",
+        "label": "Enable Animations",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "animation_style_title",
+        "label": "Animation Style (title)",
+        "options": [
+          {
+            "group": "Default",
+            "value": "",
+            "label": "Off"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-up",
+            "label": "Fade up"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-down",
+            "label": "Fade down"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-left",
+            "label": "Fade left"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-right",
+            "label": "Fade right"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-up",
+            "label": "Flip up"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-down",
+            "label": "Flip down"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-left",
+            "label": "Flip left"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-right",
+            "label": "Flip right"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "select",
+        "id": "animation_style_image",
+        "label": "Animation Style (image)",
+        "options": [
+          {
+            "group": "Default",
+            "value": "",
+            "label": "Off"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-up",
+            "label": "Fade up"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-down",
+            "label": "Fade down"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-left",
+            "label": "Fade left"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-right",
+            "label": "Fade right"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-up",
+            "label": "Flip up"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-down",
+            "label": "Flip down"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-left",
+            "label": "Flip left"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-right",
+            "label": "Flip right"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "select",
+        "id": "animation_style_description",
+        "label": "Animation Style (description)",
+        "options": [
+          {
+            "group": "Default",
+            "value": "",
+            "label": "Off"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-up",
+            "label": "Fade up"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-down",
+            "label": "Fade down"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-left",
+            "label": "Fade left"
+          },
+          {
+            "group": "Fade",
+            "value": "fade-right",
+            "label": "Fade right"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-up",
+            "label": "Flip up"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-down",
+            "label": "Flip down"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-left",
+            "label": "Flip left"
+          },
+          {
+            "group": "Flip",
+            "value": "flip-right",
+            "label": "Flip right"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "range",
+        "id": "animation_duration",
+        "min": 100,
+        "max": 1000,
+        "step": 50,
+        "unit": "ms",
+        "label": "Animation Duration (ms)",
+        "default": 300
+      }
+    ]
+  }
+{% endschema %}

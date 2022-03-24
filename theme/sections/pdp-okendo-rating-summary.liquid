@@ -1,0 +1,18 @@
+{% if section.settings.enable %}
+  {% render 'okendo-reviews-product-rating-summary', product: product %}
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Okendo Rating Summary",
+    "class": "pdp-okendo-rating-summary",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable",
+        "label": "Enable",
+        "default": false
+      }
+    ]
+  }
+{% endschema %}

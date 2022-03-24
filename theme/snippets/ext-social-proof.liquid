@@ -1,0 +1,35 @@
+{%- comment -%}
+  Stylesheets
+{%- endcomment -%}
+
+
+{%- comment -%}
+  Template
+{%- endcomment -%}
+<section class="home-social-proof section py-16 md:py-10" id="home-social-proof--{{ section.id }}" style="background-color: {{ section.settings.background_color }};">
+  <div class="home-social-proof-boxes wrap wrap--pd grid grid-cols-1 gap-10 md:gap-0 md:flex md:justify-between items-center justify-center justify-items-center" {% if section.settings.enable_animations %} data-aos="{{ section.settings.animation_style }}" data-aos-duration="{{ section.settings.animation_duration }}" {% endif %}>
+    {% for i in (1..4) %}
+      {% assign brand_logo = 'brand_logo_' | append: i %}
+      {% assign brand_url = 'brand_url_' | append: i %}
+      {% assign brand_text = 'text_' | append: i %}
+      {% assign brand_text_color = 'text_color_' | append: i %}
+
+      {% if section.settings[brand_logo] %}
+        <div class="home-social-proof__brand text-center md:w-3/12">
+          {% if section.settings[brand_url] %}
+            <a href="{{ section.settings[brand_url] }}">
+          {% endif %}
+            <div class="flex items-center" style="height: 50px;">
+              {% render 'responsive-image' with image: section.settings[brand_logo] %}
+            </div>
+          {% if section.settings[brand_url] %}
+            </a>
+          {% endif %}
+          {% if section.settings[brand_text] %}
+            <p class="mt-20px text-17px md:text-20px font-sans font-normal" style="color: {{ section.settings[brand_text_color] }};">{{ section.settings[brand_text] }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,41 @@
+<section id="page-custom-text-image-callouts-{{ section.id }}">
+  <div class="wrap wrap--pd copy--pd py-10">
+    <ul class="page-story-highlights__list space-y-10 md:space-y-0">
+      {% for i in (1..3) %}
+        {% assign callout_image = 'image_' | append: i %}
+        {% assign callout_title = 'title_' | append: i %}
+        {% assign callout_description = 'description_' | append: i %}
+        {% assign callout_bullet_1 = 'bullet_' | append: i | append: '_1' %}
+        {% assign callout_bullet_2 = 'bullet_' | append: i | append: '_2' %}
+        {% assign callout_bullet_3 = 'bullet_' | append: i | append: '_3' %}
+
+        <li class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"> 
+          <div class="col-span-1 md:m-10">
+            {% if callout_image != blank %}
+              {% render 'responsive-image' with image: block.settings[callout_image], image_class: 'overflow-hidden md:w-full mx-auto' %}
+            {% else %}
+              <div class="bg-gray-600 w-full aspect-w-1 mx-auto"></div>
+            {% endif %}
+          </div>
+          <div class="col-span-1 flex flex-col space-y-4 text-black">
+            <h3 class="h3 uppercase font-header">{{ block.settings[callout_title] }}</h3>
+            <p class="large">{{ block.settings[callout_description] }}</p>
+            <hr class="border border-black">
+            <ul class="list-style list-style--large list-style--red space-y-2 mt-2">
+              {% if block.settings[callout_bullet_1] != blank %}
+                <li class="font-header uppercase tracking-wider -ml-1">{{ block.settings[callout_bullet_1] }}</li>
+              {% endif %}
+              {% if block.settings[callout_bullet_2] != blank %}
+                <li class="font-header uppercase tracking-wider -ml-1">{{ block.settings[callout_bullet_2] }}</li>
+              {% endif %}
+              {% if block.settings[callout_bullet_3] != blank %}
+                <li class="font-header uppercase tracking-wider -ml-1">{{ block.settings[callout_bullet_3] }}</li>
+              {% endif %}
+            </ul>
+          </div>
+
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

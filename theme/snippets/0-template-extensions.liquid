@@ -1,0 +1,41 @@
+{% for block in section.blocks %}
+  {% case block.type %}
+
+    {% when 'hero' %}
+      {% render 'ext-hero' with block as section %}
+    {% when 'section-highlight-row' %}
+      {% render 'ext-section-highlight-row' with block as section %}
+    {% when 'text-cta' %}
+      {% render 'ext-text-cta' with block as section %}
+    {% when 'text-image-grid' %}
+      {% render 'ext-text-image-grid' with block as section %}
+    {% when 'social-proof' %}
+      {% render 'ext-social-proof' with block as section %}
+    {% when 'html' %}
+      {% render 'ext-html' with block as section %}
+    {% when 'product-highlight' %}
+      {% render 'ext-product-highlight' with block as section %}
+    {% when 'icons' %}
+      {% render 'ext-icons' with block as section %}
+    {% when 'text-image-callouts' %}
+      {% render 'ext-text-image-callouts' with block as section %}
+    {% when 'section-highlight-col' %}
+      {% render 'ext-section-highlight-col' with block as section %}
+    {% when 'two-column-text' %}
+      {% render 'ext-two-column-text' with block as section %}
+    {% when 'reviews-carousel-image' %}
+      {% render 'ext-reviews-image' with block as section %}
+    {% when 'reviews-carousel-text' %}
+      {% render 'ext-reviews-text' with block as section %}
+    {% when 'comparison-chart' %}
+      {% render 'ext-comparison-chart' with block as section %}
+    {% when 'okendo-reviews' %}
+      {% render 'ext-okendo-reviews' with block as section, product %}
+    {% when 'product-buy-details' %}
+      {% render 'ext-product-buy-details' with 
+      block as section, 
+      product, 
+      current_selling_plan_allocation %}
+
+  {% endcase %}
+{% endfor %}

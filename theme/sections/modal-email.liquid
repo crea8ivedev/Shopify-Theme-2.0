@@ -1,0 +1,59 @@
+{% comment %}
+  START - Data
+{% endcomment %}
+<script>
+  window.emailModal = window.emailModal || {}
+  window.emailModal.enable = {{ section.settings.enable | json }};
+  window.emailModal.klaivyo_class_name = {{ section.settings.klaivyo_class_name | json }};
+  window.emailModal.expiry_date = {{ section.settings.expiry_date | json }};
+  window.emailModal.time_to_show = {{ section.settings.time_to_show | json }};
+</script>
+{% comment %}
+  END - Data
+{% endcomment %}
+
+<div id="modal-email"></div>
+
+{% schema %}
+  {
+    "name": "Email Modal",
+    "class": "modal-email",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "klaivyo_class_name",
+        "label": "Klaviyo Class Name",
+        "info": "The class name is shown when publishing a form from Klaviyo, in the \"Embed Code\" section",
+        "placeholder": "ex. klaviyo-form-UXMk74"
+      },
+      {
+        "type": "range",
+        "id": "time_to_show",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "unit": "sec",
+        "label": "Time to show",
+        "default": 5,
+        "info": "Amount of time passed to show modal"
+      },
+      {
+        "type": "range",
+        "id": "expiry_date",
+        "min": 1,
+        "max": 21,
+        "step": 1,
+        "unit": "day",
+        "label": "Expiry Date",
+        "default": 7,
+        "info": "Amount of days until the modal will show again"
+      }
+    ]
+  }
+{% endschema %}

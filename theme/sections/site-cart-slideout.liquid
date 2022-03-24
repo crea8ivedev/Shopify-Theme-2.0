@@ -1,0 +1,73 @@
+{% comment %} START - Variables {% endcomment %}
+<script>
+  window.cartSlideout = window.cartSlideout || {}
+  window.cartSlideout.cartMessage = {{ section.settings.cart_message | json }};
+  window.cartSlideout.emptyCartUrl = {{ section.settings.empty_cart_url | json }};
+  window.cartSlideout.modifiedProducts = [
+    {% for block in section.blocks %}
+      {% assign mod_product =  all_products[block.settings.product] %}
+      {
+        productId: {{ mod_product.id | json }},
+        restricted: {{ block.settings.restricted | json }},
+        customMessage: {{ block.settings.custom_message | json }},
+        endOfList: {{ block.settings.end_of_list | json }},
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+</script>
+{% comment %} END - Variables {% endcomment %}
+
+<aside id="app-cart"></aside>
+
+{% schema %}
+  {
+    "name": "Cart Slideout",
+    "settings": [
+      {
+        "type": "text",
+        "id": "cart_message",
+        "label": "Cart Message"
+      },
+      {
+        "type": "url",
+        "id": "empty_cart_url",
+        "label": "Products URL",
+        "info": "Shown when bag is empty"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "modifications",
+        "name": "Line Item Modifications",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "checkbox",
+            "id": "restricted",
+            "label": "Restricted",
+            "default": false,
+            "info": "Restricted PDP access, and disables qty"
+          },
+          {
+            "type": "checkbox",
+            "id": "end_of_list",
+            "label": "Append at end of list",
+            "default": false,
+            "info": "This will put the line item at the end of the list"
+          },
+          {
+            "type": "text",
+            "id": "custom_message",
+            "label": "Custom Message",
+            "info": "Will be appended to line item",
+            "placeholder": "ex. Order to be shipped in 1-2 weeks"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

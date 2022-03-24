@@ -1,0 +1,53 @@
+{% comment %} Variables {% endcomment %}
+{% assign product = all_products[section.settings.product_handle] %}
+<style>
+  {% if section.settings.background_image_mobile %}
+    #home-product-highlight--{{ section.id }} {
+      background-image: url({{ section.settings.background_image_mobile | img_url: '1000x' }});
+    }
+  {% endif %}
+
+  {% if section.settings.background_image %}
+    @media screen and (min-width: 768px) {
+      #home-product-highlight--{{ section.id }} {
+        background-image: url({{ section.settings.background_image | img_url: '2000x' }});
+      }
+    }
+  {% endif %}
+</style>
+
+<section id="home-product-highlight--{{ section.id }}" class="home-product-highlight section relative bg-center bg-no-repeat bg-cover overflow-hidden bg-gray-400">
+  <div class="home-product-highlight__content wrap wrap--pd flex justify-center md:justify-start py-16">
+    <div class="home-product-highlight__product-wrap rounded-full bg-white flex flex-col items-center justify-center text-center p-10" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>
+      <h2 class="h2 font-header uppercase mb-1 sm:mb-2">
+        {% if section.settings.product_title_override != blank %}
+          {{ section.settings.product_title_override }}
+        {% else %}
+          {{ product.title }}
+        {% endif %}
+      </h2>
+      {% if section.settings.enable_ratings %}
+        <div class="okendo-style-overide mb-2">
+          {% render 'okendo-reviews-product-rating-summary', product: product %}
+        </div>
+      {% endif %}
+      <h4 class="h4 mb-4 sm:mb-6 flex items-center">
+        {{ product.price | money_without_trailing_zeros }}
+        {% if product.metafields['extra_details']['price'] != blank %}
+          <span class="text-sm ml-1">{{ product.metafields['extra_details']['price'] }}</span>
+        {% endif %}
+      </h4>
+      <div class="large mb-8 sm:mb-10">
+        {% if section.settings.product_description_override != blank %}
+          {{ section.settings.product_description_override }}
+        {% else %}
+          {{ product.description }}
+        {% endif %}
+      </div>
+      <div class="mb-4 sm:mb-6">
+        <button class="add-to-bag btn" data-global-add-to-cart data-variant-id="{{ product.first_available_variant.id }}">Add to Bag</button>
+      </div>
+      <a class="link link--red" href="/products/{{ product.handle }}">Learn more</a>
+    </div>
+  </div>
+</section>

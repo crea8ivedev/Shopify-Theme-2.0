@@ -1,0 +1,31 @@
+<section id="home-html--{{ section.id }}" class="home-html section {{ section.settings.classes }}">
+  {{ section.settings.html }}
+</section>
+
+{% schema %}
+{
+    "name": "Home Icons",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "html",
+        "label": "HTML",
+        "info": "Insert HTML code here"
+      },
+      {
+        "type": "text",
+        "id": "classes",
+        "label": "Classes (optional)",
+        "info": "Optional HTML classes to attach to the block"
+      }
+    ],
+    "max_blocks": 4,
+    "presets": [
+      {
+        "name": "HTML",
+        "category": "Section"
+      }
+    ],
+    "blocks": []
+  }
+{% endschema %}

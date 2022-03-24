@@ -1,0 +1,24 @@
+<!-- /templates/customers/register.liquid -->
+<div class="page-pad py-20 bg-cream-500">
+  <div class="copy copy--narrow">
+    <p class="mb-8 text-sm">
+      <a class="link link--red" href="{{ routes.account_login_url }}">< Return to login</a>
+    </p> 
+    <h1 class="h4 font-header uppercase mb-10">Create An Account</h1>
+    {% form 'create_customer' %} {{ form.errors | default_errors }}
+    
+    <div class="flex flex-col space-y-4">
+      <input class="px-4 py-2" type="text" value="" name="customer[first_name]" size="30" placeholder="First Name" />
+
+      <input class="px-4 py-2" type="text" value="" name="customer[last_name]" size="30" placeholder="Last Name" />
+
+      <input class="px-4 py-2" type="Email" value="" name="customer[email]" size="30" placeholder="Email" />
+
+      <input class="px-4 py-2" type="password" value="" name="customer[password]" minlength="5" size="30" placeholder="Password" />
+
+      <input class="btn" type="submit" value="Create" />
+    </div>
+
+    {% endform %} 
+  </div>
+</div>

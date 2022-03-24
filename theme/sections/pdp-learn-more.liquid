@@ -1,0 +1,70 @@
+<style>
+  /* stylelint-disable */
+  #pdp-learn-more--{{ section.id }} {
+    background-image: url({{ section.settings.background_image_mobile | img_url: '900x'}});
+  }
+
+  @media (min-width: 768px) {
+    #pdp-learn-more--{{ section.id }} {
+      background-image: url({{ section.settings.background_image_desktop | img_url: '2000x'}});
+    }
+  }
+  /* stylelint-enable */
+</style>
+
+<div id="pdp-learn-more--{{ section.id }}" class="section py-16 md:py-32 bg-black bg-opacity-40 flex justify-center flex-wrap bg-center bg-cover">
+  <div class="copy copy--pd flex flex-col items-center text-center">
+    <h2 class="h2 uppercase font-header mb-6">{{ section.settings.title }}</h2>
+    <p class="large">{{ section.settings.description }}</p>
+    {% if section.settings.cta_url and section.settings.cta_text %}
+      <a class="btn mt-12" href={{ section.settings.cta_url }}>{{ section.settings.cta_text}}</a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+    "name": "PDP Learn More",
+    "class": "pdp-learn-more",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "background_image_desktop",
+        "label": "Background Image (Desktop)"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image_mobile",
+        "label": "Background Image (Mobile)"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Title Here"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Description here"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text",
+        "info": "Learn More",
+        "default": "Learn more"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "URL"
+      }
+    ]
+  }
+{% endschema %}

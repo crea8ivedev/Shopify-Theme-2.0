@@ -1,0 +1,49 @@
+<div class="flex flex-col space-y-6 justify-center items-center text-center">
+  {% if section.settings.image %}
+    <div class="overflow-hidden" style="height: 300px; width: 300px;">
+      <img class="rounded-full" src="{{ section.settings.image | img_url: '600x' }}" alt="{{ section.settings.image.alt }}">
+    </div>
+  {% endif %}
+  <h1 class="uppercase h3 font-header">{{ section.settings.title }}</h1>
+  <p class="large">{{ section.settings.content }}</p>
+  <a href="{{ section.settings.link_url }}" class="link link--red">{{ section.settings.link_label }}</a>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "404",
+    "class": "page-404",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Something's missing"
+      },
+      {
+        "type": "text",
+        "id": "content",
+        "label": "Content",
+        "default": "It's plastic. And this page you were looking for. <br />Let's see if we can find it:"
+      },
+      {
+        "type": "text",
+        "id": "link_label",
+        "label": "Link Label",
+        "default": "Return to home"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      }
+    ]
+  }
+{% endschema %}

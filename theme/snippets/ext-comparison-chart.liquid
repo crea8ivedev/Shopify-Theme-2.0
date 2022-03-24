@@ -1,0 +1,82 @@
+{%- comment -%}
+  Stylesheets
+{%- endcomment -%}
+
+
+{%- comment -%}
+  Template
+{%- endcomment -%}
+<section class="ext-section__comparison-chart section pt-16 pb-24 xl:py-24 relative" id="ext-comparison-chart--{{ section.id }}" style="background-color: {{ section.settings.background_color }};">
+  <div class="wrap w-full">
+    <div class="ext-comparison-chart-inner pb-4 xl:pb-0">
+      <div class="flex justify-center">
+        <div class="w-full lg:w-8/12 px-6 md:px-12">
+          {% if section.settings.heading %}
+            <div class="heading text-center mb-9 md:mb-12">
+              <h2 class="h2 uppercase font-header">{{ section.settings.heading }}</h2>
+            </div>
+          {% endif %}
+          <div class="c-row">
+            {% for i in (1..5) %}
+              {% assign description = 'description_' | append: i %}
+
+              {% if forloop.first == true %}
+                <div class="c-col flex items-end">
+                  <div class="c-col-item pr-2 pb-4 md:pr-7 flex-1">
+                    {% if section.settings[description] %}
+                      <p class="text-sm md:text-20px font-sans font-normal leading-1.1">{{ section.settings[description] }}</p>
+                    {% endif %}
+                  </div>
+                  <div class="c-col-item bg-green-500 py-5 px-1 w-98px md:w-180px flex flex-col justify-end">
+                    <div class="c-logo mb-7 md:mb-9 mt-0 md:mt-6">
+                      <img alt="" class="mx-auto max-w-full" src="https://cdn.shopify.com/s/files/1/0511/8548/3954/files/White_0def9676-5a61-4626-bd75-0be761300aa9.png?v=1635147909">
+                    </div>
+                    <div class="c-icon">
+                      <img alt="Check mark" class="mx-auto w-25px h-25px md:w-auto md:h-auto object-contain" src="https://cdn.shopify.com/s/files/1/0511/8548/3954/files/Check_50x.png?v=1635146729">
+                    </div>
+                  </div>
+                  <div class="c-col-item py-5 px-1 w-98px md:w-220px">
+                    <div class="c-text mb-20px text-center">
+                      <p class="text-10px md:text-15px font-header tracking-widest font-medium leading-1.1">Other<br class="hidden md:block">
+                        Vitamin C<br class="hidden md:block">
+                        Serums</p>
+                    </div>
+                    <div class="c-icon">
+                      <img alt="Cross" class="mx-auto w-25px h-25px md:w-auto md:h-auto object-contain" src="https://cdn.shopify.com/s/files/1/0511/8548/3954/files/X_50x.png?v=1635146729">
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                <div class="c-col flex border-0 border-t-2 border-solid border-black">
+                  <div class="c-col-item pr-2 md:pr-7 flex-1">
+                    {% if section.settings[description] %}
+                      <div class="flex h-full items-center">
+                        <p class="text-sm md:text-20px font-sans font-normal leading-1.1">
+                          {{ section.settings[description] }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="c-col-item bg-green-500 py-5 px-1 w-98px md:w-180px">
+                    <div class="c-icon">
+                      <img alt="Check mark" class="mx-auto w-25px h-25px md:w-auto md:h-auto object-contain" src="https://cdn.shopify.com/s/files/1/0511/8548/3954/files/Check_50x.png?v=1635146729">
+                    </div>
+                  </div>
+                  <div class="c-col-item py-5 px-1 w-98px md:w-220px">
+                    <div class="c-icon">
+                      <img alt="Cross" class="mx-auto w-25px h-25px md:w-auto md:h-auto object-contain" src="https://cdn.shopify.com/s/files/1/0511/8548/3954/files/X_50x.png?v=1635146729">
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if section.settings.shape_image %}
+    <div class="custom-image">
+      {{ section.settings.shape_image }}
+    </div>
+  {% endif %}
+</section>

@@ -1,0 +1,34 @@
+<script>
+  window.homePage = window.homePage || {}
+  window.homePage.homeReviewsTextCarousel = [{% for i in (1..4) %}
+    {% assign cta_url = 'cta_url_' | append: i %}
+    {% assign cta_title = 'cta_title_' | append: i %}
+    {% assign stars = 'stars_' | append: i %}
+    {% assign title = 'title_' | append: i %}
+    {% assign review = 'review_' | append: i %}
+    {% assign reviewer = 'reviewer_' | append: i %}
+    {% if section.settings[review] %}
+      {
+        "cta_url": {{ section.settings[cta_url] | json }},
+        "cta_title": {{ section.settings[cta_title] | json }},
+        "stars": {{ section.settings[stars] | json }},
+        "title": {{ section.settings[title] | json }},
+        "review": {{ section.settings[review] | json }},
+        "reviewer": {{ section.settings[reviewer] | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endif %}
+  {% endfor %}];
+</script>
+
+<section id="home-reviews-carousel-text-custom-{{ section.id }}" class="home-reviews-carousel-text-custom section py-16 md:py-24" style="background-color: {{ section.settings.bg_color }}">
+  <div class="wrap wrap--pd relative text-center">
+    {% if section.settings.title_header %}
+      <h3 class="h3 font-header uppercase">{{ section.settings.title_header }}</h3>
+    {% endif %}
+    
+    <div class="py-8 md:px-8 order-2 md:order-1 text-center" id="home-reviews-carousel-text-custom__wrap"></div>
+    {% if section.settings.flower_decoration %}
+      <img class="lazyload absolute z-10 {% unless section.settings.flower_decoration_show_mobile %}hidden md:block{% endunless %}" data-src="{{ section.settings.flower_decoration | img_url: 'x400' }}" alt="Flower Decoration" style="bottom: {{ section.settings.flower_decoration_bottom }}; right: {{ section.settings.flower_decoration_right }};">
+    {% endif %}
+  </div>
+</section>

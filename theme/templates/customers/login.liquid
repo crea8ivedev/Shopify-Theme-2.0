@@ -1,0 +1,128 @@
+<div class="page-pad py-20 bg-cream-500">
+  <div class="copy copy--narrow">
+
+    <div class="form-success hidden" id="ResetSuccess">
+      {{ 'customer.recover_password.success' | t }}
+    </div>
+
+    <div id="CustomerLoginForm">
+      <h2 class="font-header h4 uppercase mb-10">{{ 'customer.login.title' | t }}</h2>
+
+      {% form 'customer_login', class: 'form-vertical' %}
+        {{ form.errors | default_errors }}
+
+        <p class="form-block">
+          <input type="email" name="customer[email]" id="CustomerEmail"
+          class="form-input{% if form.errors contains 'email' %} input-error{% endif %}"
+          spellcheck="false" autocomplete="off" autocapitalize="off" autofocus placeholder="Email">
+        </p>
+
+        {%- if form.password_needed -%}
+        <p class="form-block">
+          <input type="password" name="customer[password]" id="CustomerPassword"
+            class="form-input {% if form.errors contains 'password' %} input-error{% endif %}" placeholder="Password">
+        </p>
+        {%- endif -%}
+
+        <p>
+          <input type="submit" class="btn btn--sm" value="{{ 'customer.login.sign_in' | t }}">
+        </p>
+
+        <div class="flex space-x-4 mt-10">
+          <a class="border-b font-header uppercase" href="/account/register">
+            {{ 'layout.customer.create_account' | t }}
+          </a>
+          {%- if form.password_needed -%}
+            <div>&middot; </div>
+            <a class="border-b font-header uppercase" href="#recover" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a>
+          {%- endif -%}
+        </div>
+      {% endform %}
+    </div>
+
+    <div id="RecoverPasswordForm" class="hidden">
+      <p>{{ 'customer.recover_password.subtext' | t }}</p>
+
+      {% form 'recover_customer_password', class: 'form-vertical' %}
+      {{ form.errors | default_errors }}
+
+      {% if form.posted_successfully? %}
+        <div class="banner banner--success text-black" aria-role="alert">
+          <span class="hidden reset-password-success"></span>
+        </div>
+      {% endif %}
+
+      <p class="form-block">
+        <input type="email" name="email" id="RecoverEmail" class="form-input"
+          spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Email">
+      </p>
+
+      <p class="my-6">
+        <input type="submit" class="btn btn--sm" value="{{ 'customer.recover_password.submit' | t }}">
+        &nbsp;
+        <button type="button" class="btn btn--sm" id="HideRecoverPasswordLink">
+          {{ 'customer.recover_password.cancel' | t }}
+        </button>
+      </p>
+
+      {% endform %}
+
+    </div>
+
+    {%- if shop.checkout.guest_login -%}
+      <h2>{{ 'customer.login.guest_title' | t }}</h2>
+
+      {% form 'guest_login', class: 'form-vertical' %}
+      <p>
+        <input type="submit" class="btn" value="{{ 'customer.login.guest_continue' | t }}">
+      </p>
+      {% endform %}
+    {%- endif -%}
+
+  </div>
+</div>
+
+<script>
+  function onShowHidePasswordForm(evt) {
+    evt.preventDefault();
+    toggleRecoverPasswordForm();
+  }
+
+  function checkUrlHash() {
+    var hash = window.location.hash;
+
+    // Allow deep linking to recover password form
+    if (hash === '#recover') {
+      toggleRecoverPasswordForm();
+    }
+  }
+
+  /**
+   *  Show/Hide recover password form
+   */
+  function toggleRecoverPasswordForm() {
+    document.getElementById('RecoverPasswordForm').classList.toggle('hidden');
+    document.getElementById('CustomerLoginForm').classList.toggle('hidden');
+  }
+
+  /**
+   *  Show reset password success message
+   */
+  function resetPasswordSuccess() {
+    var formState = document.getElementsByClassName('reset-password-success');
+
+    // check if reset password form was successfully submited.
+    if (!formState.length) {
+      return;
+    }
+
+    // show success message
+    document.getElementById('ResetSuccess').classList.remove('hidden');
+  }
+
+  checkUrlHash();
+  resetPasswordSuccess();
+
+  document.getElementById('RecoverPassword').addEventListener('click', onShowHidePasswordForm);
+  document.getElementById('HideRecoverPasswordLink').addEventListener('click', onShowHidePasswordForm);
+</script>

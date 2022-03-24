@@ -1,0 +1,39 @@
+.wrap {
+  max-width: 1200px;
+  @apply mx-auto;
+}
+
+.wrap.wrap--pd,
+.copy.copy--pd {
+  @apply px-6;
+}
+
+@screen md {
+  .wrap.wrap--pd,
+  .copy.copy--pd {
+    @apply px-10
+  }
+}
+
+.page-pad {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.copy {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 680px;
+}
+
+.copy.copy--narrow {
+  max-width: 520px;
+}
+
+.copy.copy--wide {
+  max-width: 1000px;
+}
+
+.wrap{
+  @apply w-full;
+}

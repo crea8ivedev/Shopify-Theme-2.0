@@ -1,0 +1,65 @@
+{%- comment -%}
+Stylesheets
+{%- endcomment -%}
+{% assign row_bg = 'row_bg' %}
+
+
+{%- comment -%}
+Template
+{%- endcomment -%}
+<section class="zigzag text-image-grid section pb-14 md:pb-24 flex justify-center" id="text-image-grid--{{ section.id }}" style="background-color: {{section.settings[row_bg]}} ;">
+  <div class="wrap wrap--pd flex flex-col">
+    {% for i in (1..3) %}
+      {% assign row_image = 'image_' | append: i %}
+      {% assign row_image_mobile = 'mobile_image_' | append: i %}
+      {% assign row_subtitle = 'subtitle_' | append: i %}
+      {% assign row_color = 'color_' | append: i %}
+      {% assign row_title = 'title_' | append: i %}
+      {% assign row_title_color = 'title_color_' | append: i %}
+      {% assign row_description = 'description_' | append: i %}
+      {% assign row_cta_label = 'cta_label_' | append: i %}
+      {% assign row_cta_url = 'cta_url_' | append: i %}
+      {% assign row_image_positon = 'image_positon_' | append: i %}
+      {% assign row_animation_style_image = 'animation_style_image_' | append: i %}
+      {% assign row_animation_style_text = 'animation_style_text_' | append: i %}
+
+      {% if section.settings[row_image] != blank %}
+        <div class="text-image-grid__row grid grid-cols-1 lg:grid-cols-2  mt-14 md:mt-24">
+          <div class="md:grid-col-1 zigzag-image {% if section.settings[row_image_positon] == 'right' %} lg:order-2 {% endif %}" {% if section.settings.enable_animations %} data-aos="{{ section.settings[row_animation_style_image] }}" data-aos-duration="{{ section.settings.animation_duration }}" {% endif %}>
+            {%- if section.settings[row_image] != blank -%}
+              {% render 'responsive-image' with image: section.settings[row_image], image_class: 'hidden lg:block text-image-grid__row-image w-full' %}
+              {%- if section.settings[row_image_mobile] == blank -%}
+                {% render 'responsive-image' with image: section.settings[row_image], image_class: 'block lg:hidden text-image-grid__row-image w-full' %}
+              {% elsif section.settings[row_image_mobile] != blank  %}
+                {% render 'responsive-image' with image: section.settings[row_image_mobile], image_class: 'block lg:hidden text-image-grid__row-image w-full' %}
+                {% else %}
+              {%- endif -%}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg text-image-grid__row-image w-full' }}
+            {%- endif -%}
+          </div>
+          <div class="md:grid-col-1 zigzag-content pt-8 md:p-16 flex flex-col justify-center" {% if section.settings.enable_animations %} data-aos="{{ section.settings[row_animation_style_text] }}" data-aos-duration="{{ section.settings.animation_duration }}" {% endif %}>
+            {% if section.settings[row_subtitle] %}
+              <h5 class="link link--no-pointer text-15px font-medium w-max" style="color:{{ section.settings[row_color] }};">{{
+                    section.settings[row_subtitle] }}</h5>
+            {% endif %}
+            {% if section.settings[row_title] %}
+              <h2 class="h2 mt-30px md:mt-40px font-header uppercase" style="color:{{ section.settings[row_title_color] }};">{{ section.settings[row_title] }}</h2>
+            {% endif %}
+            {% if section.settings[row_description] %}
+              <div class="block-content">
+                {{ section.settings[row_description] }}
+              </div>
+            {% endif %}
+            {% if section.settings[row_cta_url] %}
+              <div class="mt-10px">
+                <a class="link link--red" href="{{ section.settings[row_cta_url] }}">{{section.settings[row_cta_label] }}</a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+    {% endfor %}
+  </div>
+</section>

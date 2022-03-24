@@ -1,0 +1,80 @@
+{% comment %}
+  START - Data
+{% endcomment %}
+<script>
+  window.homePage = window.homePage || {}
+  window.homePage.instagramCarouselBlocks = [{% for block in section.blocks %}
+      {
+        image: {{ block.settings.slide_image | json }},
+        url: {{ block.settings.slide_ig_url | json }}
+      }
+      {% unless forloop.last %},{% endunless %}{% endfor %}];
+</script>
+{% comment %}
+  END - Data
+{% endcomment %}
+
+<style>
+  .instagram-carousel__prev.swiper-button-disabled,
+  .instagram-carousel__next.swiper-button-disabled {
+    opacity: 0.3;
+  }
+</style>
+
+<div id="instagram-carousel" class="bg-black py-10 section">
+  <div class="wrap wrap--pd">
+    <div class="flex justify-between">
+      <h2 class="h2 text-white font-header text-3xl uppercase">
+        <a target="_blank" href="{{ section.settings.ig_page_url }}">@{{ section.settings.ig_handle }}</a>
+      </h2>
+      <div class="flex space-x-2">
+        <div class="instagram-carousel__prev">
+          <svg class="transform rotate-180" width="45" height="45" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 22.928h20M35.5 22.062a1 1 0 010 1.732l-7.5 4.33V17.732l7.5 4.33z" stroke="#fff" stroke-width="2"/></svg>
+        </div>
+        <div class="instagram-carousel__next">
+          <svg width="45" height="45" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 22.928h20M35.5 22.062a1 1 0 010 1.732l-7.5 4.33V17.732l7.5 4.33z" stroke="#fff" stroke-width="2"/></svg>
+        </div>
+      </div>
+    </div>
+    <div id="instagram-carousel__wrap" class="my-3"></div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Instagram Carousel",
+  "class": "ig-carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "ig_handle",
+      "label": "IG Handle",
+      "default": "commonheir",
+      "info": "\"@\" will automatically be prepended"
+    },
+    {
+      "type": "url",
+      "id": "ig_page_url",
+      "label": "IG Page URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slides",
+      "name": "Slides",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "slide_image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "slide_ig_url",
+          "label": "IG URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

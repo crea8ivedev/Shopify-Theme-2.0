@@ -1,0 +1,70 @@
+{% if section.settings.enable and section.blocks.size > 1%}
+  {% comment %}
+    START - Data
+  {% endcomment %}
+  <script>
+    window.productPageData = window.productPageData || {}
+    window.productPageData.beforeAfterImages = [{% for block in section.blocks %}
+        {{ block.settings.slide_image | json }}
+        {% unless forloop.last %},{% endunless %}{% endfor %}];
+    window.productPageData.beforeAfterDescription = [{% for block in section.blocks %}
+        {{ block.settings.description | json }}
+        {% unless forloop.last %},{% endunless %}{% endfor %}];
+  </script>
+  {% comment %}
+    END - Data
+  {% endcomment %}
+
+  <div class="section py-16 bg-cream-500 flex-wrap relative">
+    <div class="pdp-before-after wrap wrap--pd md:grid md:gap-6 lg:gap-10 space-y-6 md:space-y-0 overflow-hidden">
+      <div class="text-center md:text-right flex items-center justify-center md:justify-end">
+        <h2 class="h2 uppercase font-header">{{ section.settings.title }}</h2>
+      </div>
+      <div id="pdp-before-after__carousel" class="overflow-hidden"></div>
+      <div class="flex items-center justify-center md:justify-start">
+        <p id="before-after-description" class="large text-center md:text-left"></p>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+    "name": "PDP Before/After Carousel",
+    "class": "pdp-before-after-carousel",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Title Here"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "slide_image",
+            "label": "Slide Image"
+          },
+          {
+            "type": "text",
+            "id": "description",
+            "label": "Description",
+            "default": "description here",
+            "info": "This will dynamically change the text below"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,38 @@
+{% if section.blocks != blank %}
+  {% include 'block-faq' with id: 'page-faq-block-2' %}
+{% endif %}
+
+{% schema %}
+  {
+    "name": "FAQ Block 2",
+    "class": "page-faq-block-2",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Category Title",
+        "default": "Category Title Name"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "faq",
+        "name": "FAQ",
+        "settings": [
+          {
+            "type": "text",
+            "id": "question",
+            "label": "Question",
+            "default": "FAQ Question here"
+          },
+          {
+            "type": "textarea",
+            "id": "answer",
+            "label": "Answer",
+            "default": "Enter answer here"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

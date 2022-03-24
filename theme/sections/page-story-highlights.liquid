@@ -1,0 +1,66 @@
+{% comment %} Story Highlight {% endcomment %}
+<section id="page-story-highlights--{{ section.id }}">
+  <div class="copy copy--pd py-20">
+    <div class="flex flex-col space-y-20 text-center">
+      <p class="h4">{{ section.settings.description_top }}</p>
+      <div class="mx-auto" style="max-width: 400px;">
+        {%- if section.settings.image != blank -%}
+          {% include 'responsive-image' with image: section.settings.image, image_class: 'page-story-highlights__image' %}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg page-story-highlights__image' }}
+        {%- endif -%}
+      </div>
+      <div class="flex flex-col space-y-6">
+        <h3 class="h3 font-header">{{ section.settings.title }}</h3>
+        <p class="large">{{ section.settings.description_bottom }}</p>
+        {% if section.settings.cta_url %}
+          <div>
+            <a href="{{ section.settings.cta_url }}" class="link link--red">{{ section.settings.cta_label }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Highlights",
+    "class": "page-story-highlights",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "description_top",
+        "label": "Description (Top)",
+        "default": "Description text here"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "description_bottom",
+        "label": "Description (Bottom)",
+        "default": "Description text here"
+      },
+      {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA Label",
+        "default": "Learn More"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Url"
+      }
+    ]
+  }
+{% endschema %}

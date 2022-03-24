@@ -1,0 +1,84 @@
+{% comment %} Sustainability highlights {% endcomment %}
+<section id="page-story-highlights">
+  <div class="wrap wrap--pd copy--pd py-10">
+    <ul class="page-story-highlights__list space-y-10 md:space-y-0">
+      {% for block in section.blocks %}
+        <li class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center"> 
+          <div class="col-span-1 md:m-10">
+            {% if block.settings.image != blank %}
+              {% include 'responsive-image' with image: block.settings.image, image_class: 'rounded-full overflow-hidden aspect-h-1 w-3/4 md:w-full mx-auto' %}
+            {% else %}
+              <div class="bg-gray-600 w-full aspect-w-1 mx-auto"></div>
+            {% endif %}
+          </div>
+          <div class="col-span-1 flex flex-col space-y-4 text-black">
+            <h3 class="h3 uppercase font-header">{{ block.settings.title }}</h3>
+            <p class="large">{{ block.settings.description }}</p>
+            <hr class="border border-black">
+            <ul class="list-style list-style--large list-style--red space-y-2 mt-2">
+              {% if block.settings.bullet_1 != blank %}
+                <li class="font-header uppercase tracking-wider -ml-1">{{ block.settings.bullet_1 }}</li>
+              {% endif %}
+              {% if block.settings.bullet_2 != blank %}
+                <li class="font-header uppercase tracking-wider -ml-1">{{ block.settings.bullet_2 }}</li>
+              {% endif %}
+              {% if block.settings.bullet_3 != blank %}
+                <li class="font-header uppercase tracking-wider -ml-1">{{ block.settings.bullet_3 }}</li>
+              {% endif %}
+            </ul>
+          </div>
+
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Highlights",
+    "class": "page-sustainability-highlights",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "highlight",
+        "name": "Highlight",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title here"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description",
+            "default": "Description here."
+          },
+          {
+            "type": "text",
+            "id": "bullet_1",
+            "label": "Bullet Point 1",
+            "default": "Bullet point"
+          },
+          {
+            "type": "text",
+            "id": "bullet_2",
+            "label": "Bullet Point 2"
+          },
+          {
+            "type": "text",
+            "id": "bullet_3",
+            "label": "Bullet Point 3"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

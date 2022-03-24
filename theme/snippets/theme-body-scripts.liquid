@@ -1,0 +1,69 @@
+{{ 'theme.bundle.js' | asset_url | script_tag }}
+{{ 'sections.bundle.js' | asset_url | script_tag }}
+
+{%- if template contains 'product' -%}
+{{ 'product.bundle.js' | asset_url | script_tag }}
+{%- endif -%}
+
+{% if template.directory == 'customers' %}
+<script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+{{ 'customers.bundle.js' | asset_url | script_tag }}
+{% endif %}
+
+{% comment %} Okendo {% endcomment %}
+{{ shop.metafields.okendo.ReviewsWidgetStyleTag }}
+{{ shop.metafields.okendo.StyleCustomizations }}
+{% render 'okendo-reviews-json-ld' %}
+<script>
+window.okeReviewsWidgetOnInit = function () {
+  const reviewMain = document.querySelector('.js-okeReviews-reviews-main');
+  if (reviewMain) {
+    const callback = function (mutationList) {
+      for (const mutation of mutationList) {
+        mutation.addedNodes.forEach((n) => setupReview(n));
+      }
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(reviewMain, { childList: true });
+
+    // Run callback for the first time
+    const reviews = document.querySelectorAll('.okeReviews-reviews-review');
+    reviews.forEach((n) => setupReview(n));
+  }
+};
+
+function setupReview(nodeElement) {
+  if (nodeElement) {
+    const reviewRecommendation = nodeElement.querySelector(
+      '.okeReviews-review-recommendation'
+    );
+    const reviewMainContent = nodeElement.querySelector(
+      '.okeReviews-review-helpful'
+    );
+    if (reviewRecommendation && reviewMainContent) {
+      reviewMainContent.insertAdjacentElement(
+        'beforebegin',
+        reviewRecommendation
+      );
+    }
+  }
+}
+</script>
+
+{% comment %} START - Klaviyo {% endcomment %}
+<script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=SuPJMT"></script>
+{%- comment -%}Identify Customers{%- endcomment -%}
+<script>
+  var _learnq = _learnq || [];
+  if ('{{ customer.email }}') {
+    _learnq.push(['identify', {
+        '$email' : '{{ customer.email }}'
+      }]);
+   }
+ </script>
+{% comment %} END - Klaviyo {% endcomment %}
+
+{% if settings.enable_gorgias_chatbox %}
+  {% comment %} Gorgias {% endcomment %}
+  <!--Gorgias Chat Widget Start--><script id="gorgias-chat-widget-install">!function(_){_.GORGIAS_CHAT_APP_ID="4808",_.GORGIAS_CHAT_BASE_URL="us-east1-898b.production.gorgias.chat",_.GORGIAS_API_BASE_URL="config.gorgias.chat";var e=new XMLHttpRequest;e.open("GET","https://config.gorgias.chat/applications/4808",!0),e.onload=function(t){if(4===e.readyState)if(200===e.status){var n=JSON.parse(e.responseText);if(!n.application||!n.bundleVersion)throw new Error("Missing fields in the response body - https://config.gorgias.chat/applications/4808");if(_.GORGIAS_CHAT_APP=n.application,_.GORGIAS_CHAT_BUNDLE_VERSION=n.bundleVersion,n&&n.texts&&(_.GORGIAS_CHAT_TEXTS=n.texts),n&&n.sspTexts&&(_.GORGIAS_CHAT_SELF_SERVICE_PORTAL_TEXTS=n.sspTexts),!document.getElementById("gorgias-chat-container")){var o=document.createElement("div");o.id="gorgias-chat-container",document.body.appendChild(o);var r=document.createElement("script");r.setAttribute("defer",!0),r.src="https://storage.googleapis.com/gorgias-chat-production-client-builds/{bundleVersion}/static/js/main.js".replace("{bundleVersion}",n.bundleVersion),document.body.appendChild(r)}}else console.error("Failed request GET - https://config.gorgias.chat/applications/4808")},e.onerror=function(_){console.error(_)},e.send()}(window||{});</script><!--Gorgias Chat Widget End-->
+{% endif %}

@@ -1,0 +1,20 @@
+<style>
+  #home-text-cta-{{ section.id }} {
+    background: {{ section.settings.bg_color }};
+  }
+
+  #home-text-cta-{{ section.id }} p {
+    color: {{ section.settings.text_color }};
+  }
+</style>
+
+<section id="home-text-cta-{{ section.id }}" class="text-cta section text-cta--{{ section.id }} py-16">
+  <div class="copy copy--pd flex flex-col items-center m-auto text-center" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>
+    <p class="h4">{{ section.settings.text }}</p>
+    {% if section.settings.cta_link and section.settings.cta_label %}
+      <div class="mt-10">
+        <a href="{{ section.settings.cta_link }}" class="{{ section.settings.cta_type }}">{{ section.settings.cta_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>

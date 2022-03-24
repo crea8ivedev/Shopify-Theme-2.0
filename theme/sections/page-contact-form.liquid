@@ -1,0 +1,48 @@
+<section id="page-contact-form" class="bg-cream-500 py-10">
+  <div class="wrap wrap--pd">
+    <div class="grid grid-cols-1 md:grid-cols-8 gap-6">
+      <div class="col-span-1 md:col-span-3">
+        <h2 class="h4 font-header mb-6 uppercase">{{ section.settings.more_info_title }}</h2>
+        <div class="large">{{ section.settings.more_info_content }}</div>
+      </div>
+      <div class="col-span-1 md:col-span-5">
+        {% form 'contact' %}
+          <div class="flex flex-col space-y-6 w-full">
+            <h2 class="h4 font-header uppercase">For everything else</h2>
+            {% if form.posted_successfully? %}
+              <p class="large text-black">Thank you for reaching out to us. <br />You'll hear back from us within 24-48 hours.</p>
+            {% else %}
+              {{ form.errors | default_errors }}
+              <input class="bg-cream-500 py-2 px-4" type="text" id="ContactFormName" name="contact[name]" placeholder="Name">
+              <input class="bg-cream-500 py-2 px-4" type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email">
+              <input class="bg-cream-500 py-2 px-4" type="tel" id="ContactOrderNumber" name="contact[orderNumber]" placeholder="Order # (optional)">
+              <textarea class="bg-cream-500 py-2 px-4" rows="10" id="ContactFormMessage" name="contact[body]" placeholder="Message"></textarea>
+              <input class="btn" type="submit" value="submit">
+            {% endif %}
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Contact Form",
+    "class": "page-contact-form",
+    "settings": [
+      {
+        "type": "text",
+        "id": "more_info_title",
+        "label": "More Info Title",
+        "default": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "more_info_content",
+        "label": "More Info Content",
+        "default": "Enter more info here"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,6 @@
+.accordion-section.accordion-section--on .accordion-group-focus\:max-h-screen {
+  max-height: 2000px;
+}
+.accordion-section.accordion-section--on .accordion-group-focus\:-rotate-180 {
+  @apply rotate-180;
+}

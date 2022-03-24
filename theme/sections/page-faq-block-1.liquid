@@ -1,0 +1,36 @@
+{% include 'block-faq' with id: 'page-faq-block-1' %}
+
+{% schema %}
+  {
+    "name": "FAQ Block 1",
+    "class": "page-faq-block-1",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Category Title",
+        "default": "Category Title Name"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "faq",
+        "name": "FAQ",
+        "settings": [
+          {
+            "type": "text",
+            "id": "question",
+            "label": "Question",
+            "default": "FAQ Question here"
+          },
+          {
+            "type": "textarea",
+            "id": "answer",
+            "label": "Answer",
+            "default": "Enter answer here"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

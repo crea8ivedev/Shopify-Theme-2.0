@@ -1,0 +1,2032 @@
+{% include '0-template-extensions' with section %}
+
+{% schema %}
+  {
+    "name": "Custom Lander",
+    "class": "custom-lander",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "hero",
+        "name": "Hero",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image (Mobile)"
+          },
+          {
+            "type": "checkbox",
+            "id": "full_height",
+            "label": "Full height",
+            "info": "Adjust to the full height of the browser window. Image cropping occurs from the center. Does not apply to small screens.",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Hero Title"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text"
+          },
+          {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#fff"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "select",
+            "id": "button_type",
+            "label": "Button Type",
+            "options": [
+              {
+                "value": "btn",
+                "label": "primary"
+              },
+              {
+                "value": "btn btn--secondary",
+                "label": "secondary"
+              }
+            ],
+            "default": "btn"
+          },
+          {
+            "type": "header",
+            "content": "Content"
+          },
+          {
+            "type": "select",
+            "id": "horizontal_position",
+            "label": "Horizontal position",
+            "default": "hero__content--left",
+            "options": [
+              {
+                "label": "Left",
+                "value": "hero__content--left"
+              },
+              {
+                "label": "Center",
+                "value": "hero__content--center"
+              },
+              {
+                "label": "Right",
+                "value": "hero__content--right"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "vertical_position",
+            "label": "Vertical position",
+            "default": "hero__content--top",
+            "options": [
+              {
+                "label": "Top",
+                "value": "hero__content--top"
+              },
+              {
+                "label": "Middle",
+                "value": "hero__content--middle"
+              },
+              {
+                "label": "Bottom",
+                "value": "hero__content--bottom"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "background_opacity",
+            "label": "Background Opacity",
+            "default": "0.5",
+            "options": [
+              {
+                "label": "90%",
+                "value": "0.9"
+              },
+              {
+                "label": "80%",
+                "value": "0.8"
+              },
+              {
+                "label": "70%",
+                "value": "0.7"
+              },
+              {
+                "label": "60%",
+                "value": "0.6"
+              },
+              {
+                "label": "50%",
+                "value": "0.5"
+              },
+              {
+                "label": "40%",
+                "value": "0.4"
+              },
+              {
+                "label": "30%",
+                "value": "0.3"
+              },
+              {
+                "label": "20%",
+                "value": "0.2"
+              },
+              {
+                "label": "10%",
+                "value": "0.1"
+              },
+              {
+                "label": "0%",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_animations",
+            "label": "Enable Animations",
+            "default": false
+          },
+          {
+            "type": "select",
+            "id": "animation_style",
+            "label": "Animation Style",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-up"
+          },
+          {
+            "type": "range",
+            "id": "animation_duration",
+            "min": 100,
+            "max": 1000,
+            "step": 50,
+            "unit": "ms",
+            "label": "Animation Duration (ms)",
+            "default": 300
+          },
+          {
+            "type": "range",
+            "id": "animation_delay",
+            "min": 0,
+            "max": 1000,
+            "step": 50,
+            "unit": "ms",
+            "label": "Animation Delay (ms)",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "type": "section-highlight-row",
+        "name": "Section Highlight (row)",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title here"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description",
+            "default": "Description here"
+          },
+          {
+            "type": "header",
+            "content": "Borders"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_top_border",
+            "label": "Enable Top Border",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_bottom_border",
+            "label": "Enable Bottom Border",
+            "default": true
+          },
+          {
+            "type": "header",
+            "content": "Animations"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_animations",
+            "label": "Enable Animations",
+            "default": false
+          },
+          {
+            "type": "select",
+            "id": "animation_style_title",
+            "label": "Animation Style (title)",
+            "options": [
+              {
+                "group": "Default",
+                "value": "",
+                "label": "Off"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": ""
+          },
+          {
+            "type": "select",
+            "id": "animation_style_image",
+            "label": "Animation Style (image)",
+            "options": [
+              {
+                "group": "Default",
+                "value": "",
+                "label": "Off"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": ""
+          },
+          {
+            "type": "select",
+            "id": "animation_style_description",
+            "label": "Animation Style (description)",
+            "options": [
+              {
+                "group": "Default",
+                "value": "",
+                "label": "Off"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": ""
+          },
+          {
+            "type": "range",
+            "id": "animation_duration",
+            "min": 100,
+            "max": 1000,
+            "step": 50,
+            "unit": "ms",
+            "label": "Animation Duration (ms)",
+            "default": 300
+          }
+        ]
+      },
+      {
+        "type": "text-cta",
+        "name": "Text CTA",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Background"
+          },
+          {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Backgorund Color",
+            "default": "#3E4B20"
+          },
+          {
+            "type": "header",
+            "content": "Text"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text",
+            "default": "Enter text here"
+          },
+          {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "header",
+            "content": "CTA"
+          },
+          {
+            "type": "text",
+            "id": "cta_label",
+            "label": "CTA label",
+            "default": "Learn more"
+          },
+          {
+            "type": "url",
+            "id": "cta_link",
+            "label": "CTA link"
+          },
+          {
+            "type": "select",
+            "id": "cta_type",
+            "label": "CTA type",
+            "options": [
+              {
+                "value": "btn",
+                "label": "Primary"
+              },
+              {
+                "value": "btn btn--secondary",
+                "label": "Secondary"
+              }
+            ],
+            "default": "btn"
+          },
+          {
+            "type": "header",
+            "content": "Animations"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_animations",
+            "label": "Enable Animations",
+            "default": false
+          },
+          {
+            "type": "select",
+            "id": "animation_style",
+            "label": "Animation Style",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-up"
+          },
+          {
+            "type": "range",
+            "id": "animation_duration",
+            "min": 100,
+            "max": 1000,
+            "step": 50,
+            "unit": "ms",
+            "label": "Animation Duration (ms)",
+            "default": 300
+          }          
+        ]
+      },
+      {
+        "type": "text-image-grid",
+        "name": "Text Image Grid",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Animations",
+            "info": "Set animation types on the blocks"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_animations",
+            "label": "Enable Animations",
+            "default": false
+          },
+          {
+            "type": "range",
+            "id": "animation_duration",
+            "min": 100,
+            "max": 1000,
+            "step": 50,
+            "unit": "ms",
+            "label": "Animation Duration (ms)",
+            "default": 300
+          },
+          {
+            "type": "header",
+            "content": "Row 1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image 1"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Title 1",
+            "default": "Title here"
+          },
+          {
+            "type": "textarea",
+            "id": "description_1",
+            "label": "Description 1",
+            "default": "Description here"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_1",
+            "label": "CTA Label 1",
+            "default": "Learn more"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_1",
+            "label": "CTA URL 1"
+          },
+          {
+            "type": "select",
+            "id": "animation_style_image_1",
+            "label": "Animation Style (Image 1)",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-right"
+          },
+          {
+            "type": "select",
+            "id": "animation_style_text_1",
+            "label": "Animation Style (text 1)",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-left"
+          },
+          {
+            "type": "header",
+            "content": "Row 2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image 2"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Title 2",
+            "default": "Title here"
+          },
+          {
+            "type": "textarea",
+            "id": "description_2",
+            "label": "Description 2",
+            "default": "Description here"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_2",
+            "label": "CTA Label 2",
+            "default": "Learn more"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_2",
+            "label": "CTA URL 2"
+          },
+          {
+            "type": "select",
+            "id": "animation_style_image_2",
+            "label": "Animation Style (Image 2)",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-right"
+          },
+          {
+            "type": "select",
+            "id": "animation_style_text_2",
+            "label": "Animation Style (text 2)",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-left"
+          },
+          {
+            "type": "header",
+            "content": "Row 3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image 3"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Title 3",
+            "default": "Title here"
+          },
+          {
+            "type": "textarea",
+            "id": "description_3",
+            "label": "Description 3",
+            "default": "Description here"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_3",
+            "label": "CTA Label 3",
+            "default": "Learn more"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_3",
+            "label": "CTA URL 3"
+          },
+          {
+            "type": "select",
+            "id": "animation_style_image_3",
+            "label": "Animation Style (Image 3)",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-right"
+          },
+          {
+            "type": "select",
+            "id": "animation_style_text_3",
+            "label": "Animation Style (text 3)",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-left"
+          }
+        ]
+      },
+      {
+        "type": "social-proof",
+        "name": "Social Proof",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Animations"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_animations",
+            "label": "Enable Animations",
+            "default": false
+          },
+          {
+            "type": "select",
+            "id": "animation_style",
+            "label": "Animation Style",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-up"
+          },
+          {
+            "type": "range",
+            "id": "animation_duration",
+            "min": 100,
+            "max": 1000,
+            "step": 50,
+            "unit": "ms",
+            "label": "Animation Duration (ms)",
+            "default": 150
+          },
+          {
+            "type": "image_picker",
+            "id": "brand_logo_1",
+            "label": "Brand Logo 1"
+          },
+          {
+            "type": "url",
+            "id": "brand_url_1",
+            "label": "URL 1",
+            "info": "This is optional"
+          },
+          {
+            "type": "image_picker",
+            "id": "brand_logo_2",
+            "label": "Brand Logo 2"
+          },
+          {
+            "type": "url",
+            "id": "brand_url_2",
+            "label": "URL 2",
+            "info": "This is optional"
+          },
+          {
+            "type": "image_picker",
+            "id": "brand_logo_3",
+            "label": "Brand Logo 3"
+          },
+          {
+            "type": "url",
+            "id": "brand_url_3",
+            "label": "URL 3",
+            "info": "This is optional"
+          },
+          {
+            "type": "image_picker",
+            "id": "brand_logo_4",
+            "label": "Brand Logo 4"
+          },
+          {
+            "type": "url",
+            "id": "brand_url_4",
+            "label": "URL 4",
+            "info": "This is optional"
+          }
+        ]
+      },
+      {
+        "type": "html",
+        "name": "HTML",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "html",
+            "label": "HTML",
+            "info": "Insert HTML code here"
+          },
+          {
+            "type": "text",
+            "id": "classes",
+            "label": "Classes (optional)",
+            "info": "Optional HTML classes to attach to the block"
+          }
+        ]
+      },
+      {
+        "type": "product-highlight",
+        "name": "Product Highlight",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product_handle",
+            "label": "Product",
+            "info": "Select a product to highlight"
+          },
+          {
+            "type": "image_picker",
+            "id": "background_image",
+            "label": "Background Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "background_image_mobile",
+            "label": "Background Image (Mobile)"
+          },
+          {
+            "type": "header",
+            "content": "Overrides",
+            "info": "Only use this section if you want to override the default info from product"
+          },
+          {
+            "type": "text",
+            "id": "product_title_override",
+            "label": "Product Title (Override)"
+          },
+          {
+            "type": "textarea",
+            "id": "product_description_override",
+            "label": "Product Description (Override)"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_animations",
+            "label": "Enable Animations",
+            "default": false
+          },
+          {
+            "type": "select",
+            "id": "animation_style",
+            "label": "Animation Style",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-up"
+          },
+          {
+            "type": "range",
+            "id": "animation_duration",
+            "min": 100,
+            "max": 1000,
+            "step": 50,
+            "unit": "ms",
+            "label": "Animation Duration (ms)",
+            "default": 300
+          }
+        ]
+      },
+      {
+        "type": "icons",
+        "name": "Icons",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Colors"
+          },
+          {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background Color",
+            "default": "#F7F3ED"
+          },
+          {
+            "type": "color",
+            "id": "font_color",
+            "label": "Font Color",
+            "default": "#000000"
+          },
+          {
+            "type": "header",
+            "content": "Animations"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_animations",
+            "label": "Enable Animations",
+            "default": false
+          },
+          {
+            "type": "select",
+            "id": "animation_style",
+            "label": "Animation Style",
+            "options": [
+              {
+                "group": "Fade",
+                "value": "fade-up",
+                "label": "Fade up"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-down",
+                "label": "Fade down"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-left",
+                "label": "Fade left"
+              },
+              {
+                "group": "Fade",
+                "value": "fade-right",
+                "label": "Fade right"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-up",
+                "label": "Flip up"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-down",
+                "label": "Flip down"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-left",
+                "label": "Flip left"
+              },
+              {
+                "group": "Flip",
+                "value": "flip-right",
+                "label": "Flip right"
+              }
+            ],
+            "default": "fade-up"
+          },
+          {
+            "type": "range",
+            "id": "animation_duration",
+            "min": 100,
+            "max": 1000,
+            "step": 50,
+            "unit": "ms",
+            "label": "Animation Duration (ms)",
+            "default": 300
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_image_1",
+            "label": "Image 1"
+          },
+          {
+            "type": "text",
+            "id": "icon_title_1",
+            "label": "Icon Title 1"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_image_2",
+            "label": "Image 2"
+          },
+          {
+            "type": "text",
+            "id": "icon_title_2",
+            "label": "Icon Title 2"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_image_3",
+            "label": "Image 3"
+          },
+          {
+            "type": "text",
+            "id": "icon_title_3",
+            "label": "Icon Title 3"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_image_4",
+            "label": "Image 4"
+          },
+          {
+            "type": "text",
+            "id": "icon_title_4",
+            "label": "Icon Title 4"
+          }
+        ]
+      },
+      {
+        "type": "text-image-callouts",
+        "name": "Text Image Callouts",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Callout 1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Title",
+            "default": "Title here"
+          },
+          {
+            "type": "textarea",
+            "id": "description_1",
+            "label": "Description",
+            "default": "Description here."
+          },
+          {
+            "type": "text",
+            "id": "bullet_1_1",
+            "label": "Bullet Point 1",
+            "default": "Bullet point"
+          },
+          {
+            "type": "text",
+            "id": "bullet_1_2",
+            "label": "Bullet Point 2"
+          },
+          {
+            "type": "text",
+            "id": "bullet_1_3",
+            "label": "Bullet Point 3"
+          },
+          {
+            "type": "header",
+            "content": "Callout 2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Title",
+            "default": "Title here"
+          },
+          {
+            "type": "textarea",
+            "id": "description_2",
+            "label": "Description",
+            "default": "Description here."
+          },
+          {
+            "type": "text",
+            "id": "bullet_2_1",
+            "label": "Bullet Point 1",
+            "default": "Bullet point"
+          },
+          {
+            "type": "text",
+            "id": "bullet_2_2",
+            "label": "Bullet Point 2"
+          },
+          {
+            "type": "text",
+            "id": "bullet_2_3",
+            "label": "Bullet Point 3"
+          },
+          {
+            "type": "header",
+            "content": "Callout 3"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Title",
+            "default": "Title here"
+          },
+          {
+            "type": "textarea",
+            "id": "description_3",
+            "label": "Description",
+            "default": "Description here."
+          },
+          {
+            "type": "text",
+            "id": "bullet_3_1",
+            "label": "Bullet Point 1",
+            "default": "Bullet point"
+          },
+          {
+            "type": "text",
+            "id": "bullet_3_2",
+            "label": "Bullet Point 2"
+          },
+          {
+            "type": "text",
+            "id": "bullet_3_3",
+            "label": "Bullet Point 3"
+          }
+        ]
+      },
+      {
+        "type": "section-highlight-col",
+        "name": "Section Highlight (Col)",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "description_top",
+            "label": "Description (Top)",
+            "default": "Description text here"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "description_bottom",
+            "label": "Description (Bottom)",
+            "default": "Description text here"
+          },
+          {
+            "type": "text",
+            "id": "cta_label",
+            "label": "CTA Label",
+            "default": "Learn More"
+          },
+          {
+            "type": "url",
+            "id": "cta_url",
+            "label": "CTA Url"
+          }
+        ]
+      },
+      {
+        "type": "two-column-text",
+        "name": "Two Column Text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description"
+          },
+          {
+            "type": "header",
+            "content": "Block 1"
+          },
+          {
+            "type": "text",
+            "id": "block_title_1",
+            "label": "Block Title 1",
+            "default": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "block_description_1",
+            "label": "Block Description 1",
+            "default": "Enter description here."
+          },
+          {
+            "type": "header",
+            "content": "Block 2"
+          },
+          {
+            "type": "text",
+            "id": "block_title_2",
+            "label": "Block Title 2",
+            "default": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "block_description_2",
+            "label": "Block Description 2",
+            "default": "Enter description here."
+          },
+          {
+            "type": "header",
+            "content": "Block 3"
+          },
+          {
+            "type": "text",
+            "id": "block_title_3",
+            "label": "Block Title 3",
+            "default": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "block_description_3",
+            "label": "Block Description 3",
+            "default": "Enter description here."
+          }
+        ]
+      },
+      {
+        "type": "reviews-carousel-image",
+        "name": "Reviews Carousel w/ Image",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Title"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title here"
+          },
+          {
+            "type": "header",
+            "content": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "static_image",
+            "label": "Static Image",
+            "info": "Image to appear beside reviews"
+          },
+          {
+            "type": "header",
+            "content": "Background Decor"
+          },
+          {
+            "type": "image_picker",
+            "id": "flower_decoration",
+            "label": "Flower Decoration",
+            "info": "Image will overlay on top of image"
+          },
+          {
+            "type": "checkbox",
+            "id": "flower_decoration_show_mobile",
+            "label": "Show mobile",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "flower_decoration_bottom",
+            "label": "Bottom",
+            "default": "50%",
+            "info": "y-direction position"
+          },
+          {
+            "type": "text",
+            "id": "flower_decoration_right",
+            "label": "Right",
+            "default": "50%",
+            "info": "x-direction position"
+          },
+          {
+            "type": "header",
+            "content": "Review Block 1"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Title",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_1",
+            "label": "CTA Label"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_1",
+            "label": "CTA URL"
+          },
+          {
+            "type": "range",
+            "id": "stars_1",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "default": 5,
+            "unit": "★",
+            "label": "Stars"
+          },
+          {
+            "type": "textarea",
+            "id": "review_1",
+            "label": "Review",
+            "default": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.”"
+          },
+          {
+            "type": "text",
+            "id": "reviewer_1",
+            "label": "Reviewer",
+            "default": "Name here"
+          },
+          {
+            "type": "header",
+            "content": "Review Block 2"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Title 2",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_2",
+            "label": "CTA Label 2"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_2",
+            "label": "CTA URL 2"
+          },
+          {
+            "type": "range",
+            "id": "stars_2",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "default": 5,
+            "unit": "★",
+            "label": "Stars 2"
+          },
+          {
+            "type": "textarea",
+            "id": "review_2",
+            "label": "Review 2",
+            "default": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.”"
+          },
+          {
+            "type": "text",
+            "id": "reviewer_2",
+            "label": "Reviewer 2",
+            "default": "Name here"
+          },
+          {
+            "type": "header",
+            "content": "Review Block 3"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Title 3",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_3",
+            "label": "CTA Label 3"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_3",
+            "label": "CTA URL 3"
+          },
+          {
+            "type": "range",
+            "id": "stars_3",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "default": 5,
+            "unit": "★",
+            "label": "Stars 3"
+          },
+          {
+            "type": "textarea",
+            "id": "review_3",
+            "label": "Review 3",
+            "default": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.”"
+          },
+          {
+            "type": "text",
+            "id": "reviewer_3",
+            "label": "Reviewer 3",
+            "default": "Name here"
+          },
+          {
+            "type": "header",
+            "content": "Review Block 4"
+          },
+          {
+            "type": "text",
+            "id": "title_4",
+            "label": "Title 4",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_4",
+            "label": "CTA Label 4"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_4",
+            "label": "CTA URL 4"
+          },
+          {
+            "type": "range",
+            "id": "stars_4",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "default": 5,
+            "unit": "★",
+            "label": "Stars 4"
+          },
+          {
+            "type": "textarea",
+            "id": "review_4",
+            "label": "Review 4",
+            "default": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.”"
+          },
+          {
+            "type": "text",
+            "id": "reviewer_4",
+            "label": "Reviewer 4",
+            "default": "Name here"
+          }
+        ]
+      },
+      {
+        "type": "reviews-carousel-text",
+        "name": "Reviews Carousel w/ Text",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Title"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title here"
+          },
+          {
+            "type": "header",
+            "content": "Background Decor"
+          },
+          {
+            "type": "image_picker",
+            "id": "flower_decoration",
+            "label": "Flower Decoration",
+            "info": "Image will overlay on top of image"
+          },
+          {
+            "type": "checkbox",
+            "id": "flower_decoration_show_mobile",
+            "label": "Show mobile",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "flower_decoration_bottom",
+            "label": "Bottom",
+            "default": "50%",
+            "info": "y-direction position"
+          },
+          {
+            "type": "text",
+            "id": "flower_decoration_right",
+            "label": "Right",
+            "default": "50%",
+            "info": "x-direction position"
+          },
+          {
+            "type": "header",
+            "content": "Review Block 1"
+          },
+          {
+            "type": "text",
+            "id": "title_1",
+            "label": "Title",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_1",
+            "label": "CTA Label"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_1",
+            "label": "CTA URL"
+          },
+          {
+            "type": "range",
+            "id": "stars_1",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "default": 5,
+            "unit": "★",
+            "label": "Stars"
+          },
+          {
+            "type": "textarea",
+            "id": "review_1",
+            "label": "Review",
+            "default": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.”"
+          },
+          {
+            "type": "text",
+            "id": "reviewer_1",
+            "label": "Reviewer",
+            "default": "Name here"
+          },
+          {
+            "type": "header",
+            "content": "Review Block 2"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Title 2",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_2",
+            "label": "CTA Label 2"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_2",
+            "label": "CTA URL 2"
+          },
+          {
+            "type": "range",
+            "id": "stars_2",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "default": 5,
+            "unit": "★",
+            "label": "Stars 2"
+          },
+          {
+            "type": "textarea",
+            "id": "review_2",
+            "label": "Review 2",
+            "default": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.”"
+          },
+          {
+            "type": "text",
+            "id": "reviewer_2",
+            "label": "Reviewer 2",
+            "default": "Name here"
+          },
+          {
+            "type": "header",
+            "content": "Review Block 3"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Title 3",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_3",
+            "label": "CTA Label 3"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_3",
+            "label": "CTA URL 3"
+          },
+          {
+            "type": "range",
+            "id": "stars_3",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "default": 5,
+            "unit": "★",
+            "label": "Stars 3"
+          },
+          {
+            "type": "textarea",
+            "id": "review_3",
+            "label": "Review 3",
+            "default": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.”"
+          },
+          {
+            "type": "text",
+            "id": "reviewer_3",
+            "label": "Reviewer 3",
+            "default": "Name here"
+          },
+          {
+            "type": "header",
+            "content": "Review Block 4"
+          },
+          {
+            "type": "text",
+            "id": "title_4",
+            "label": "Title 4",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "cta_label_4",
+            "label": "CTA Label 4"
+          },
+          {
+            "type": "url",
+            "id": "cta_url_4",
+            "label": "CTA URL 4"
+          },
+          {
+            "type": "range",
+            "id": "stars_4",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "default": 5,
+            "unit": "★",
+            "label": "Stars 4"
+          },
+          {
+            "type": "textarea",
+            "id": "review_4",
+            "label": "Review 4",
+            "default": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.”"
+          },
+          {
+            "type": "text",
+            "id": "reviewer_4",
+            "label": "Reviewer 4",
+            "default": "Name here"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

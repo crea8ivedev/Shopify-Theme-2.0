@@ -1,0 +1,36 @@
+<script>
+  window.homePage = window.homePage || {}
+  window.homePage.homeReviewsImageCarousel = [{% for i in (1..4) %}
+    {% assign cta_url = 'cta_url_' | append: i %}
+    {% assign cta_title = 'cta_title_' | append: i %}
+    {% assign stars = 'stars_' | append: i %}
+    {% assign review = 'review_' | append: i %}
+    {% assign reviewer = 'reviewer_' | append: i %}
+    {% if section.settings[review] %}
+      {
+        "cta_url": {{ section.settings[cta_url] | json }},
+        "cta_title": {{ section.settings[cta_title] | json }},
+        "stars": {{ section.settings[stars] | json }},
+        "review": {{ section.settings[review] | json }},
+        "reviewer": {{ section.settings[reviewer] | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endif %}
+  {% endfor %}];
+</script>
+
+<section id="home-reviews-carousel-image-custom-{{ section.id }}" class="home-reviews-carousel-image-custom section py-16 md:py-24 bg-cream-500">
+  <div class="wrap wrap--pd">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="py-8 md:px-8 order-2 md:order-1">
+        <h3 class="h3 font-header uppercase">{{ section.settings.title_header }}</h3>
+        <div id="home-reviews-carousel-image-custom__wrap"></div>
+      </div>
+      <div class="home-reviews-carousel-cusotm__image order-1 md:order-2 relative py-8 md:px-8">
+        <div class="lazyload aspect-w-1 aspect-h-1 bg-center bg-no-repeat bg-cover" data-bg="{{ section.settings.static_image | img_url: 'x900' }}"></div>
+        {% if section.settings.flower_decoration %}
+          <img class="lazyload absolute z-10 {% unless section.settings.flower_decoration_show_mobile %}hidden md:block{% endunless %}" data-src="{{ section.settings.flower_decoration | img_url: 'x400' }}" alt="Flower Decoration" style="bottom: {{ section.settings.flower_decoration_bottom }}; right: {{ section.settings.flower_decoration_right }};">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

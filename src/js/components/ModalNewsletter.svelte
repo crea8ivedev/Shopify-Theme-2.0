@@ -1,0 +1,1 @@
+<div class={window.emailModal.klaivyo_class_name}></div>

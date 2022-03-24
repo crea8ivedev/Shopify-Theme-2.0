@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'quincycf-text';
+  src: url('quincycf-text-webfont.woff2') format('woff2'),
+       url('quincycf-text-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

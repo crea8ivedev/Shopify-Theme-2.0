@@ -1,0 +1,212 @@
+{% comment %} Hero {% endcomment %}
+
+<section id="page-sustainability-hero--{{ section.id }}" class="hero {% if section.settings.full_height %} hero--full{% endif %} relative bg-cream-500 overflow-hidden" style="min-height: 700px;">
+  {%- if section.settings.image != blank -%}
+    <div class="h-full w-full absolute inset-0">
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg hero__image' }}
+    </div>
+  {%- endif -%}
+  {%- if section.settings.image_mobile != blank -%}
+    {% include 'responsive-image' with image: section.settings.image_mobile, image_class: 'hero__image hero__image--mobile h-full w-full absolute inset-0 md:hidden' %}
+  {%- endif -%}
+
+
+  {% comment %} Side Images {% endcomment %}
+  <div class="absolute transform -translate-y-1/2" style="left: -{{ section.settings.left_side_image_width | plus: 0 | divided_by: 2 }}px; width: {{ section.settings.left_side_image_width }}px; top: {{ section.settings.left_side_image_top_pos }}%;">
+    {% include 'responsive-image' with image: section.settings.left_side_image, image_class: '' %}
+  </div>
+  <div class="absolute transform -translate-y-1/2" style="right: -{{ section.settings.right_side_image_width | plus: 0 | divided_by: 2 }}px; width: {{ section.settings.right_side_image_width }}px; top: {{ section.settings.right_side_image_top_pos }}%;">
+    {% include 'responsive-image' with image: section.settings.right_side_image, image_class: '' %}
+  </div>
+  <div class="absolute transform -translate-y-1/2" style="right: -{{ section.settings.bottom_right_side_image_width | plus: 0 | divided_by: 2 }}px; width: {{ section.settings.bottom_right_side_image_width }}px; top: {{ section.settings.bottom_right_side_image_top_pos }}%;">
+    {% include 'responsive-image' with image: section.settings.bottom_right_side_image, image_class: '' %}
+  </div>
+
+  <div class="hero__content wrap wrap--pd flex-col mx-auto justify-center items-center text-center" style="color: {{ section.settings.text_color }}">
+
+    <div class="hero__content-block z-10">
+      {%- if section.settings.title != blank -%}
+        <h1 class="h1 font-header mb-6">{{ section.settings.title }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="large">
+          {{ section.settings.text }}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <div class="mt-8"><a href="{{ section.settings.button_link }}" class="{{ section.settings.button_type }}">{{ section.settings.button_label }}</a></div>
+      {%- endif -%}
+    </div>
+    <div class="copy copy--wide grid grid-cols-2 justify-items-center items-start sm:flex md:justify-between gap-4 mt-20 w-full">
+      {% for block in section.blocks %}
+        <div class="pdp-icons__wrap w-full flex flex-col justify-center items-center space-y-4">
+          <div class="rounded-full overflow-hidden w-full bg-white" style="max-width: 100px;">
+            {% if block.settings.image != blank %}
+              <img class="pdp-icons__image" src="{{ block.settings.image | img_url: '200x' }}" alt="Icon {{ forloop.index }}">
+            {% else %}
+              <div class="aspect-w-1 aspect-h-1"></div>
+            {% endif %}
+          </div>
+          <h6 class="text-center">{{ block.settings.label }}</h6>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image (Mobile)"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_height",
+        "label": "Full height",
+        "info": "Adjust to the full height of the browser window. Image cropping occurs from the center. Does not apply to small screens.",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Side Images"
+      },
+      {
+        "type": "image_picker",
+        "id": "left_side_image",
+        "label": "Left Side Image"
+      },
+      {
+        "type": "text",
+        "id": "left_side_image_width",
+        "label": "Left Side Image Width",
+        "default": "500",
+        "info": "in pixels (px)"
+      },
+      {
+        "type": "text",
+        "id": "left_side_image_top_pos",
+        "label": "Left Side Image Top Position",
+        "default": "50",
+        "info": "in percent (%)"
+      },
+      {
+        "type": "image_picker",
+        "id": "right_side_image",
+        "label": "Right Side Image"
+      },
+      {
+        "type": "text",
+        "id": "right_side_image_width",
+        "label": "Right Side Image Width",
+        "default": "500",
+        "info": "in pixels (px)"
+      },
+      {
+        "type": "text",
+        "id": "right_side_image_top_pos",
+        "label": "Right Side Image Top Position",
+        "default": "50",
+        "info": "percent (%)"
+      },
+      {
+        "type": "image_picker",
+        "id": "bottom_right_side_image",
+        "label": "Bottom Right Side Image"
+      },
+      {
+        "type": "text",
+        "id": "bottom_right_side_image_width",
+        "label": "Bottom Right Side Image Width",
+        "default": "500",
+        "info": "in pixels (px)"
+      },
+      {
+        "type": "text",
+        "id": "bottom_right_side_image_top_pos",
+        "label": "Bottom Right Side Image Top Position",
+        "default": "100",
+        "info": "percent (%)"
+      },
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Hero Title"
+      },
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "Text"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "select",
+        "id": "button_type",
+        "label": "Button Type",
+        "options": [
+          {
+            "value": "btn",
+            "label": "primary"
+          },
+          {
+            "value": "btn btn--secondary",
+            "label": "secondary"
+          }
+        ],
+        "default": "btn"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "bullet_point",
+        "name": "Bullet Point",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "label",
+            "label": "Label",
+            "default": "Bullet point<br />Lorem Ipsum"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

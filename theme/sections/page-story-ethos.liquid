@@ -1,0 +1,91 @@
+<style>
+  #page-story-ethos .page-story-ethos__image {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    #page-story-ethos .page-story-ethos__image {
+      width: 600px;
+      top: 0;
+      right: 0;
+      margin-left: 0;
+    }
+  }
+</style>
+
+{% comment %} Story Ethos {% endcomment %}
+<section id="page-story-ethos" class="bg-cream-500 overflow-hidden">
+  <div class="wrap wrap--pd py-10">
+    <div class="mb-8 border-b">
+      <h2 class="h2 font-header uppercase mb-2 text-center md:text-left">{{ section.settings.title }}</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-8 gap-10 md:gap-6 my-10 md:mx-10">
+      <div class="order-2 md:order-1 md:col-span-2 relative">
+        <div class="page-story-ethos__image rounded-full overflow-hidden md:absolute aspect-h-1">
+          {%- if section.settings.image != blank -%}
+            {% include 'responsive-image' with image: section.settings.image, image_class: 'page-story-founders__image' %}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg page-story-founders__image' }}
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="order-1 md:order-2 md:col-span-2">
+        <h4 class="large">{{ section.settings.description }}</h4>
+      </div>
+      <div class="order-3 md:order-3 md:col-span-4 flex flex-col space-y-6">
+        {% for block in section.blocks %}
+          <div class="flex flex-col space-y-2">
+            <h3 class="h3 font-header uppercase">{{ block.settings.title }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Ethos",
+    "class": "page-story-ethos",
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "highlight",
+        "name": "Highlight",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "description",
+            "default": "Enter description here."
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,79 @@
+{% comment %} START - Data {% endcomment %}
+<script>
+  window.productPageData = window.productPageData || {};
+  window.productPageData.pdpJSON = {{ product | json }};
+</script>
+{% comment %} END - Data {% endcomment %}
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+<section id="overview" class="bg-cream-500 py-10 md:py-16">
+  <div class="flex flex-col-reverse space-y-4 space-y-reverse lg:space-y-0 lg:grid md:grid-cols-8 lg:grid-cols-10 lg:gap-10 wrap pl-6 lg:pl-10 pr-0">
+
+    <div class="pdp-info lg:col-span-4 pr-6 md:pr-0" style="max-width: 500px;">
+      <h1 class="pdp-title h2 font-header uppercase">{{ product.title }}</h1>
+      {% section 'pdp-okendo-rating-summary' %}
+      {%- comment -%}
+      <h4 class="pdp-price h4 mt-4 flex items-center">
+        {% if product.price_varies %}
+          {{ product.price_min | money_without_trailing_zeros }}
+          -
+          {{ product.price_max | money_without_trailing_zeros }}
+        {% else %}
+          {{ product.price | money_without_trailing_zeros }}
+        {% endif %}
+      </h4>
+      {%- endcomment -%}
+      <div class="pdp-decription text-lg mt-4">
+        {{ product.description }}
+      </div>
+      {% if product.metafields['extra_details']['pdp_description_1'] != blank %}
+        <div class="pdp-extra-details mt-2">
+          <h3 class="font-header mb-1 text-sm tracking-wider font-semibold">INCLUDES:</h3>
+          <ul class="list-style list-style--dash">
+            {% for i in (1..3) %}
+              {% assign pdp_description_num = 'pdp_description_' | append: i %}
+              {% if product.metafields['extra_details'][pdp_description_num] %}
+                <li>{{ product.metafields['extra_details'][pdp_description_num] }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <div class="pdp-form-wrapper mt-4">
+        {% include 'product-form' %}
+      </div>
+
+      {% if product.metafields['pdp_highlights'] != blank %}
+        <div id="pdp-highlights" class="pdp-highlights mt-10">
+          <div class="pdp-highlights__list space-y-3">
+            {% for i in (1..3) %}
+              {% assign title = 'title_' | append: i %}
+              {% assign content = 'content_' | append: i %}
+              <div class="pdp-highlights__point">
+                <h6 class="font-header mb-1 text-sm tracking-wider font-semibold">{{ product.metafields['pdp_highlights'][title] }}</h6>
+                <ul class="small list-style list-style--red">{{ product.metafields['pdp_highlights'][content] }}</ul>
+              </div>
+            {% endfor %}
+          </div>
+          <p class="pdp-highlights__footer text-xs mt-4">{{ product.metafields['pdp_highlights']['footer'] }}</p>
+        </div>
+        <a id="pdp-highlights__see-more" href="#" class="underline text-red-500">See More</a>
+      {% endif %}
+    </div>
+
+    <div id="pdp-img-carousel" class="pdp-img-carousel lg:col-span-6"></div>
+  </div>
+</section>
+{% section 'pdp-icons' %}
+{% section 'pdp-more-info' %}
+{% section 'pdp-before-after-carousel' %}
+{% section 'pdp-learn-more' %}
+{% section 'pdp-okendo-reviews' %}
+
+<div id="pdp-add-to-cart-mobile"></div>
+
+{%- comment -%}Scripts{%- endcomment -%}
+{% render 'scripts-pdp-klaviyo' %}

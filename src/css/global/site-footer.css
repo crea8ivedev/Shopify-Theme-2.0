@@ -1,0 +1,21 @@
+.site-footer__menu {
+  grid-template-columns: 1fr 1fr;
+}
+
+.site-footer__menu li:nth-child(odd) {
+  text-align: right;
+}
+
+.site-footer__menu li:nth-child(even) {
+  text-align: left;
+}
+
+@screen md {
+  .site-footer__menu {
+    grid-template-columns: 200px 200px;
+  }
+
+  .site-footer__menu li:nth-child(odd) {
+    text-align: left;
+  }
+}

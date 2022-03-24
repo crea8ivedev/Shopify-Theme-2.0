@@ -1,0 +1,23 @@
+<section id="ext-section-highlight-col-{{ section.id }}">
+  <div class="copy copy--pd py-20">
+    <div class="flex flex-col space-y-20 text-center">
+      <p class="h4">{{ section.settings.description_top }}</p>
+      <div class="mx-auto" style="max-width: 400px;">
+        {%- if section.settings.image != blank -%}
+          {% include 'responsive-image' with image: section.settings.image, image_class: 'page-story-highlights__image' %}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg page-story-highlights__image' }}
+        {%- endif -%}
+      </div>
+      <div class="flex flex-col space-y-6">
+        <h3 class="h3 font-header">{{ section.settings.title_header }}</h3>
+        <p class="large">{{ section.settings.description_bottom }}</p>
+        {% if section.settings.cta_url %}
+          <div>
+            <a href="{{ section.settings.cta_url }}" class="link link--red">{{ section.settings.cta_label }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,92 @@
+<!-- BEGIN SMARTRR SNIPPET -->
+{% render 'smartrr-account' %}
+<!-- END SMARTRR SNIPPET -->
+
+{%- comment -%}
+
+<!-- /templates/customers/account.liquid -->
+<div id="account" class="bg-cream-500">
+  <div class="wrap wrap--pd py-20">
+    <div class="flex flex-col mb-20 flex-wrap">
+      <h1 class="h3 font-header uppercase mb-4">Account Details</h1>
+      <div>
+        <a class="link link--red text-sm" href="{{ routes.account_logout_url }}">Logout</a>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+      <div class="col-span-1">
+        <h2 class="large font-header uppercase mb-4">Your Address{% if customer.addresses.size > 1%}es{% endif %}</h2>
+        <ul class="flex flex-col space-y-4">
+          {% for address in customer.addresses %}
+            <div>
+              <h3 class="h6 font-bold">Address {{ forloop.index }}</h3>
+              <p>{{ address.first_name }}
+                {{ address.last_name }}</p>
+              <p>{{ address.address1 }}</p>
+              {% if address.address2 != "" %}
+                <p>{{ address.address2 }}</p>
+              {% endif %}
+              <p>{{ address.city }},
+                {% if address.province_code %}
+                  {{ address.province_code }},
+                {% endif %}
+                {{ address.country }}</p>
+              <p>{{ address.zip }}</p>
+              {% if address.phone != blank %}
+                <p>Phone #: {{ address.phone }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </ul>
+        <div class="mt-6">
+          <a class="link link--red text-sm" href="{{ routes.account_addresses_url }}">Add/Edit Addresses</a>
+        </div>
+      </div>
+      <div class="col-span-4 md:col-span-4">
+        {% if customer.orders.size != 0 %}
+          {% paginate customer.orders by 50 %}
+            <table id="customer_orders" class="table table-auto w-full text-left text-sm md:text-base">
+              <thead class="border-b">
+                <tr>
+                  <th class="pb-4">
+                    Order
+                  </th>
+                  <th class="pb-4">
+                    Date
+                  </th>
+                  <th class="pb-4">
+                    Shipping Status
+                  </th>
+                  <th class="pb-4">
+                    &nbsp;
+                  </th>
+                  <th class="pb-4">
+                    Total
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="table-row-group">
+                {% for order in customer.orders %}
+                  <tr class="table-row border-b border-gray-300">
+                    <td class="py-4">
+                      <a class="border-b" target="_blank" href="{{ order.order_status_url }}">{{ order.order_number }}</a>
+                    </td>
+                    <td class="py-4">{{ order.created_at | date: "%b %d, %Y" }}</td>
+                    <td class="py-4">{{ order.fulfillment_status }}</td>
+                    <td class="py-4"><a class="border-b" href="{{ order.customer_url }}">View order</a></td>
+                    <td class="py-4">{{ order.total_price | | money_without_currency }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% endpaginate %}
+        {% else %}
+          <div class="text-center my-10">
+            <p class="large">You haven't placed any orders yet.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{%- endcomment -%}

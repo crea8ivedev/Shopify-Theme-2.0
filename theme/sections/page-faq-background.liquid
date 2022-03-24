@@ -1,0 +1,35 @@
+<style>
+  /* stylelint-disable */
+  #page-faqs-background--{{ section.id }} {
+    min-height: 400px;
+    background-image: url({{ section.settings.background_image_mobile | img_url: 'master' }});
+  }
+
+  @media screen and (min-width: 768px) {
+    #page-faqs-background--{{ section.id }} {
+      background-image: url({{ section.settings.background_image | img_url: 'master' }});
+    }
+  }
+  /* stylelint-enable */
+</style>
+
+<div id="page-faqs-background--{{ section.id }}" class="py-16 md:py-32 bg-black bg-opacity-40 flex justify-center flex-wrap bg-center bg-cover"></div>
+
+{% schema %}
+{
+    "name": "Page FAQ Background",
+    "class": "page-faqs-background",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image_mobile",
+        "label": "Background Image (Mobile)"
+      }
+    ]
+  }
+{% endschema %}

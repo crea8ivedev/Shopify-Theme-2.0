@@ -1,0 +1,23 @@
+{%- comment -%}
+  Stylesheets
+{%- endcomment -%}
+
+
+{%- comment -%}
+  Template
+{%- endcomment -%}
+<section id="home-icons--{{ section.id }}" class="home-icons section px-6 md:px-0" style="background-color: {{ section.settings.background_color }};">
+  <div class="wrap wrap--pd w-full grid grid-cols-2 justify-items-center sm:grid-cols-4 gap-4 py-10 sm:py-10 {% if section.settings.top_border  %} border-0 border-t-2 border-solid border-black {% endif %} {% if section.settings.bottom_border  %} border-0 border-b-2 border-solid border-black {% endif %}" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>
+    {% for i in (1..4) %}
+      {% assign icon_image = 'icon_image_' | append: i %}
+      {% assign icon_title = 'icon_title_' | append: i %}
+
+      {% if section.settings[icon_image] != blank %}
+        <div class="home-icons__wrap w-full flex-none">
+          <img class="home-icons__image lazyload" data-src="{{ section.settings[icon_image] | img_url: '200x' }}" src="{{ section.settings[icon_image] | img_url: '25x' }}" alt="Icon {{ forloop.index }}">
+          <h6 class="text-center text-22px md:text-20px font-sans" style="color: {{ section.settings.font_color }};">{{ section.settings[icon_title] }}</h6>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,154 @@
+/* -------------------- Footer signup ------------------- */
+.klaviyo-newsletter-signup * {
+  @apply font-header !important;
+}
+
+.klaviyo-newsletter-signup input::-webkit-input-placeholder {
+  font-family: theme('fontFamily.header') !important;
+  text-transform: uppercase;
+  color: theme('colors.gray.500');
+}
+
+.klaviyo-newsletter-signup input::-ms-input-placeholder {
+  font-family: theme('fontFamily.header') !important;
+  text-transform: uppercase;
+  color: theme('colors.gray.500');
+}
+
+.klaviyo-newsletter-signup input::placeholder {
+  font-family: theme('fontFamily.header') !important;
+  text-transform: uppercase;
+  color: theme('colors.gray.500');
+}
+
+/* -------------------- Gorgias Chat -------------------- */
+#gorgias-chat-container #chat-button {
+  bottom: 40px;
+}
+
+/* -------------------- Password Page ------------------- */
+.shopify-challenge__container {
+  @apply py-20;
+  min-height: 500px;
+}
+
+/* ----------------- Cookie GDPR banner ----------------- */
+.cc-window *,
+.cc-settings-dialog,
+.cc-settings-dialog * {
+  font-family: "quincycf-text", Helvetica, Arial !important;
+}
+
+/* ----------------------- Okendo ----------------------- */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-reviewsSummary {
+  margin-top: 0;
+}
+
+/* Change main font size */
+.okendo-style-overide .okeReviews.okeReviews--theme {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+/* Navbar Items */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-widgetNavBar .okeReviews-widgetNavBar-item {
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-widgetNavBar-item[aria-selected=true] {
+  border-color: theme('colors.red.500');
+}
+
+/* Remove Reviews count */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-reviews-controls-reviewCount {
+  display: none !important;
+}
+
+/* Buttons */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-button {
+  font-family: 'Roboto Mono', Helvetica, Arial;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+  font-weight: 700;
+  border-radius: 0;
+  padding: 0.6em 1em;
+}
+
+/* Button - Write a review */
+.okendo-style-overide .okeReviews.okeReviews--theme .js-okeReviews-writeReview {
+  background: theme('colors.red.500');
+  border-color: theme('colors.red.500');
+
+}
+
+/* Select */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-select {
+  border-radius: 0;
+  font-family: 'Roboto Mono', Helvetica, Arial;
+  border-color: #000000;
+}
+
+/* Select Spacing on large and medium */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-reviewsWidget.is-okeReviews-reviewsWidget-medium .okeReviews-select,
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-reviewsWidget.is-okeReviews-reviewsWidget-large .okeReviews-select {
+  margin-left: 0.8em;
+}
+
+/* Select - Inside border */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-select::before {
+  border-color: #000000;
+}
+
+/* Total Reviews */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-reviewsAggregate-summary {
+  font-family: 'Roboto Mono', Helvetica, Arial;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* Avatar Backgrouds */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-avatar {
+  background: #ffffff;
+}
+
+/* Attributes Label */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-review-attribute-label,
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-sectionedList-heading {
+  font-family: 'Roboto Mono', Helvetica, Arial;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5em;
+}
+
+/* Main Review Heading */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-review-main-heading {
+  text-transform: uppercase;
+}
+
+/* Table Borders */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-reviewsWidget .okeReviews-review-side,
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-reviewsWidget .okeReviews-review-primary {
+  border-color:#000000 !important;
+}
+
+/* Footer */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-reviews-footer:before {
+  background: #000000;
+}
+
+/* Footer - Show More */
+.okendo-style-overide .okeReviews.okeReviews--theme .okeReviews-reviews-showMore {
+  color: #000000;
+  border-color: #000000;
+}
+
+/* Alternate themes */
+.okendo-style-overide.okendo-style-overide--white .okeReviews.okeReviews--theme {
+  color: #ffffff;
+}

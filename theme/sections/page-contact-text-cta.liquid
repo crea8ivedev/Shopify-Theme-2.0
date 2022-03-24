@@ -1,0 +1,86 @@
+<style>
+  #page-contact-text-cta{{ section.id }} {
+    background: {{ section.settings.bg_color }};
+  }
+
+  #page-contact-text-cta{{ section.id }} p {
+    color: {{ section.settings.text_color }};
+  }
+</style>
+
+<section id="page-contact-text-cta{{ section.id }}" class="text-cta text-cta--{{ section.id }} py-16">
+  <div class="copy copy--pd flex flex-col items-center m-auto text-center">
+    <p class="h4">{{ section.settings.text }}</p>
+    {% if section.settings.cta_link and section.settings.cta_label %}
+      <div class="mt-10">
+        <a href="{{ section.settings.cta_link }}" class="{{ section.settings.cta_type }}">{{ section.settings.cta_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Text CTA Block",
+    "class": "section-text-cta",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Background"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Backgorund Color",
+        "default": "#3E4B20"
+      },
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "Text",
+        "default": "Enter text here"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA label",
+        "default": "Learn more"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA link"
+      },
+      {
+        "type": "select",
+        "id": "cta_type",
+        "label": "CTA type",
+        "options": [
+          {
+            "value": "btn",
+            "label": "Primary"
+          },
+          {
+            "value": "btn btn--secondary",
+            "label": "Secondary"
+          }
+        ],
+        "default": "btn"
+      }
+    ]
+  }
+{% endschema %}

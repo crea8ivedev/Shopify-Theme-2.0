@@ -1,0 +1,145 @@
+/* ----------------------- General ---------------------- */
+.section {
+  overflow: hidden;
+}
+
+/* ------------------------ Hero ------------------------ */
+.hero {
+  position: relative;
+  min-height: 400px;
+}
+
+.hero--md {
+  max-height: 600px;
+}
+
+.hero__image {
+  height: auto;
+  object-fit: cover;
+  vertical-align: bottom;
+  width: 100%;
+}
+
+.hero__image.placeholder-svg {
+  min-height: 600px;
+}
+
+.hero__title {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero__content {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+  @apply pt-16;
+}
+
+@screen md {
+  .hero {
+    max-height: 600px;
+    display: flex;
+  }
+
+  .hero--full {
+    height: 100vh;
+    max-height: 100vh;
+  }
+
+  .hero__content {
+    align-items: flex-start;
+    display: flex;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: left;
+    @apply pt-0;
+  }
+
+  /* Horizontal position */
+  .hero__content--left {
+    justify-content: flex-start;
+  }
+
+  .hero__content--center {
+    justify-content: center;
+  }
+
+  .hero__content--right {
+    justify-content: flex-end;
+  }
+
+  /* Vertical position */
+  .hero__content--top {
+    align-items: flex-start;
+  }
+
+  .hero__content--middle {
+    align-items: center;
+  }
+
+  .hero__content--bottom {
+    align-items: flex-end;
+  }
+
+  .hero__content-block {
+    max-width: 500px;
+  }
+}
+
+/* ----------------------- Product Highlight ----------------------- */
+
+.home-product-highlight__product-wrap {
+  height: 425px;
+  width: 425px;
+  position: absolute;
+  top: 40px;
+}
+
+.home-product-highlight__content {
+  min-height: 600px;
+}
+
+@screen sm {
+  .home-product-highlight__product-wrap {
+    position: static;
+    height: 600px;
+    width: 600px; 
+  }
+}
+
+/* ---------------------- PDP Icons --------------------- */
+.pdp-icons__wrap {
+  max-width: 200px;
+}
+
+.pdp-icons__image {
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
+
+/* --------------------- Home Icons --------------------- */
+.home-icons .home-icons__wrap {
+  max-width: 200px;
+}
+
+.home-icons .home-icons__image {
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
+
+/* --------------------- Ext Text Image Grid --------------------- */
+.zigzag .link::after{
+  @apply border-current;
+}
+
+.home-social-proof__brand img{
+  @apply mx-auto;
+}

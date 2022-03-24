@@ -1,0 +1,99 @@
+<!-- /templates/customers/order.liquid -->
+<div id="account" class="bg-cream-500">
+  <div class="copy copy--wide copy--pd py-20">
+    <p class="mb-8 text-sm">
+      <a class="link link--red" href="/account">< {{ 'customer.account.return' | t }}</a>
+    </p>
+    <div>
+      <h1 class="h2 font-header uppercase">Order #{{ order.order_number }}</h1>
+      <p>{{ order.created_at | date: "%b %d, %Y"}}</p>
+      <div class="my-4">
+        <p>
+          <span class="font-bold">Payment Status:</span>
+          <span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span>
+        </p>
+        <p>
+          <span class="font-bold">Fulfillment Status:</span>
+          <span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 my-10">
+      <div id="billing-address" class="col-span-1">
+        <h2 class="font-header uppercase large mb-6">Billing Address</h2>
+        
+        <p>{{ order.billing_address.name }}</p>
+        <p>{{ order.billing_address.company }}</p>
+        <p>{{ order.billing_address.street }}</p>
+        <p>{{ order.billing_address.city }},
+          {{ order.billing_address.province }}</p>
+        <p>{{ order.billing_address.country }}
+          {{ order.billing_address.zip }}</p>
+        <p>{{ order.billing_address.phone }}</p>
+      </div>
+      <div id="shipping-address" class="col-span-1">
+        <h2 class="font-header uppercase large mb-6">Shipping Address</h2>
+        <p>{{ order.shipping_address.name }}</p>
+        <p>{{ order.shipping_address.company }}</p>
+        <p>{{ order.shipping_address.street }}</p>
+        <p>{{ order.shipping_address.city }},
+          {{ order.shipping_address.province }}</p>
+        <p>{{ order.shipping_address.country }}
+          {{ order.shipping_address.zip }}</p>
+        <p>{{ order.shipping_address.phone }}</p>
+      </div>
+    </div>
+    <div>
+      <h2 class="font-header uppercase large mb-6">Order Details</h2>
+      <table class="table table-auto w-full text-left">
+        <thead class="border-b">
+          <tr>
+            <th class="pb-4">Detail</th>
+            <th class="pb-4">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-row border-b border-gray-300">
+            <td class="py-4">Subtotal</td>
+            <td class="py-4">{{ order.subtotal_price | money }}</td>
+          </tr>
+          <tr class="table-row border-b border-gray-300">
+            <td class="py-4">Total Discounts</td>
+            <td class="py-4">{{ order.total_discounts | money }}</td>
+          </tr>
+          <tr class="table-row border-b border-gray-300">
+            <td class="py-4">Shipping Price</td>
+            <td class="py-4">{{ order.shipping_price | money }}</td>
+          </tr>
+          <tr class="table-row border-b border-gray-300">
+            <td class="py-4">Taxes</td>
+            <td class="py-4">{{ order.tax_price | money }}</td>
+          </tr>
+          <tr class="table-row border-b border-gray-300">
+            <td class="py-4">Total</td>
+            <td class="py-4">{{ order.total_price | money }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="line-items" class="mt-20">
+      <h2 class="font-header uppercase large mb-6">Line Items</h2>
+      <table class="table table-auto w-full text-left">
+        <thead class="border-b">
+          <tr>
+            <th class="pb-4">Title</th>
+            <th class="pb-4">Qty</th>
+            <th class="pb-4">Line Price</th>
+          </tr>
+        </thead>
+        {% for line_item in order.line_items %}
+          <tr class="table-row border-b border-gray-300">
+            <td class="py-4">{{ line_item.title | link_to: line_item.product.url }}</td>
+            <td class="py-4">{{ line_item.quantity }}</td>
+            <td class="py-4">{{ line_item.line_price | money }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>

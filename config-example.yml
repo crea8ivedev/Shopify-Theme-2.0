@@ -1,0 +1,10 @@
+# THIS IS AN EXAMPLE config.yml
+# 1. DUPLICATE THIS FILE
+# 2. Replace theme_id
+
+development:
+  password: 'REPLACE_THEMEKIT_PASSWORD'
+  theme_id: "REPLACE_THIS_THEME_ID"
+  store: "STORE_URL"
+  ignore_files:
+  - config/settings_data.json

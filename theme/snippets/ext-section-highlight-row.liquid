@@ -1,0 +1,21 @@
+<section id="home-section-highlight-row--{{ section.id }}" class="home-section-highlight-row bg-cream-500 section">
+  <div class="py-16 wrap wrap--pd md:grid md:grid-cols-4 md:gap-6 lg:gap-10 space-y-6 md:space-y-0 {% if section.settings.enable_top_border %}border-t-2{% endif %} {% if section.settings.enable_bottom_border %}border-b-2{% endif %}">
+    <div class="text-center md:text-right flex items-center justify-center md:justify-end col-span-1">
+      <h2 class="h2 uppercase font-header" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style_title }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>{{ section.settings.title_header }}</h2>
+    </div>
+    <div class="col-span-2">
+      <div class="aspect-w-1 aspect-h-1 overflow-hidden" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style_image }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>
+        {%- if section.settings.image != blank -%}
+          {% include 'responsive-image' with image: section.settings.image, image_class: 'home-section-highlight__image' %}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg home-section-highlight__image' }}
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="flex items-center col-span-1">
+      <p class="large text-center md:text-left" {% if section.settings.enable_animations %}data-aos="{{ section.settings.animation_style_description }}" data-aos-duration="{{ section.settings.animation_duration }}"{% endif %}>
+        {{ section.settings.description }}
+      </p>
+    </div>
+  </div>
+</section>
